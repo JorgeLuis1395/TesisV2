@@ -3,17 +3,9 @@ import { RouterModule } from '@angular/router';
 
 import { FuseSharedModule } from '@fuse/shared.module';
 import {MatIconModule} from "@angular/material/icon";
-import { Memoria2Component } from './memoria2/memoria2.component';
+import { CuentosComponent } from './cuentos/cuentos.component';
 
 const routes = [
-    {
-        path        : 'dashboards/analytics',
-        loadChildren: () => import('./dashboards/analytics/analytics.module').then(m => m.AnalyticsDashboardModule)
-    },
-    {
-        path        : 'dashboards/project',
-        loadChildren: () => import('./dashboards/project/project.module').then(m => m.ProjectDashboardModule)
-    },
     {
         path        : 'mail',
         loadChildren: () => import('./mail/mail.module').then(m => m.MailModule)
@@ -57,6 +49,10 @@ const routes = [
     {
         path        : 'memoria2',
         loadChildren: () => import('./memoria2/memoria2.module').then(m => m.Memoria2Module)
+    },
+    {
+        path        : 'cuentos',
+        loadChildren: () => import('./cuentos/cuentos.module').then(m => m.CuentosModule)
     },
     {
         path        : 'home',

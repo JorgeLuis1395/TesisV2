@@ -1,0 +1,10 @@
+<div id="photos-videos" class="p-24">
+    <div class="period">
+
+        <div class="period-media" fxLayout="row wrap">
+            <div class="media" *ngFor="let media of period">
+                <img class="preview" [src]="media.imagen" title="{{media.nombre}}">
+            </div>
+        </div>
+    </div>
+</div>
