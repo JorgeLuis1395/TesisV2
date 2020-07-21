@@ -84,14 +84,14 @@ $typography: mat-typography-config(
 @import "src/app/main/apps/academy/academy.theme";
 @import "src/app/main/apps/calendar/calendar.theme";
 @import "src/app/main/apps/chat/chat.theme";
-@import "src/app/main/apps/contacts/contacts.theme";
+@import "main/apps/ahorcado/contacts.theme";
 @import "src/app/main/apps/dashboards/project/project.theme";
 @import "src/app/main/apps/e-commerce/orders/orders.theme";
-@import "src/app/main/apps/e-commerce/products/products.theme";
+@import "main/apps/e-commerce/lista_estudiantes/products.theme";
 @import "src/app/main/apps/file-manager/file-manager.theme";
 @import "src/app/main/apps/mail/mail.theme";
 @import "src/app/main/apps/mail-ngrx/mail.theme";
-@import "src/app/main/apps/scrumboard/scrumboard.theme";
+@import "main/apps/welcome/scrumboard.theme";
 @import "src/app/main/apps/todo/todo.theme";
 
 @import "src/app/main/pages/authentication/login-2/login-2.theme";

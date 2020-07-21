@@ -1,0 +1,78 @@
+<div id="contacts" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+
+    <!-- HEADER -->
+    <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start"
+         fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-between center">
+
+        <!-- APP TITLE -->
+        <div fxLayout="row" fxLayoutAlign="start center">
+
+            <button mat-icon-button class="sidebar-toggle mr-12" fxHide.gt-sm
+                    (click)="toggleSidebar('contacts-main-sidebar')">
+                <mat-icon>menu</mat-icon>
+            </button>
+
+            <div class="logo" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon mr-16"
+                          [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">account_box
+                </mat-icon>
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    AHORCADO Da clic sobre la letra o vocal para completar la palabra
+                </span>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- / HEADER -->
+
+
+    <!-- CONTENT -->
+    <div class="content">
+
+        <div class="card-body">
+            <div class="content" fxLayoutAlign="start center"
+                 fxLayout="row"
+                 fxLayout.xs="column">
+
+                <div fxFlex="100" style="align-content: center" fxLayoutAlign="center">
+                    <img src="assets/img/{{ intentos }}.png" class="ahorcado-img" width="250" height="250">
+                </div>
+
+                <div fxFlex="100" style="align-content: center" fxLayoutAlign="center">
+                    <img src="assets/recursos/ahorcado/{{ imagen }}" width="150" height="150">
+                </div>
+            </div>
+
+            <div class="content" fxLayoutAlign="start center"
+                 fxLayout="row"
+                 fxLayout.xs="column">
+
+                <div fxFlex="100" style="align-content: center" fxLayoutAlign="center">
+                    <h3><b>Intentos {{ intentos }} / 9</b></h3>
+                </div>
+
+                <div fxFlex="100" style="align-content: center" fxLayoutAlign="center">
+                    <h1><b>{{ palabraOculta }}</b></h1>
+                </div>
+            </div>
+
+
+            <div class="row" *ngIf="gano"></div>
+            <div class="row" *ngIf="perdio"></div>
+            <div class="row" *ngIf="!gano && !perdio">
+                <div class="col text-center">
+                    <button mat-button color="warn" style="color: white; background-color: #0a68d9" (click)="comprobar( letra )" *ngFor="let letra of letras">{{ letra }}</button>
+                </div>
+            </div>
+            <br><br>
+            <div class="row">
+                <div class="col-sm-12" align="center">
+                    <button mat-button color="warn" style="color: white; background-color: #0a68d9" (click)="consultarNuevaPalabra()">Siguiente Palabra
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

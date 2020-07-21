@@ -1,0 +1,20 @@
+@mixin scrumboard-theme($theme) {
+
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+    $accent: map-get($theme, accent);
+
+
+    // Board
+    scrumboard-board {
+
+        #board {
+
+            > .header {
+                background-color: map-get($accent, default);
+                color: map-get($accent, default-contrast);
+            }
+        }
+    }
+
+}

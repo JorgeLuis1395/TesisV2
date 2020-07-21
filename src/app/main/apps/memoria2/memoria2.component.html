@@ -1,0 +1,49 @@
+<div id="contacts" class="page-layout simple left-sidebar inner-sidebar inner-scroll">
+
+    <!-- HEADER -->
+    <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start"
+         fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-between center">
+
+        <!-- APP TITLE -->
+        <div fxLayout="row" fxLayoutAlign="start center">
+
+            <button mat-icon-button class="sidebar-toggle mr-12" fxHide.gt-sm
+                    (click)="toggleSidebar('contacts-main-sidebar')">
+                <mat-icon>menu</mat-icon>
+            </button>
+
+            <div class="logo" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon mr-16"
+                          [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">account_box
+                </mat-icon>
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    MEMORIA I
+                </span>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- / HEADER -->
+
+
+    <!-- CONTENT -->
+    <div class="content">
+
+        <div class="container">
+            <div fxFlex="100" style="align-content: center" fxLayoutAlign="center" class="card opacity" align="center">
+                <div class="intentos">
+                    <b>Intentos restantes:</b> {{intentos - cont_intentos}}
+                </div>
+                <div class="mesa-cartas">
+      <span *ngFor="let card of cards; index as i">
+        <img class="img-card" src="{{card.visible ? card.url : images_inact}}" (click)="card_selected(i)"
+             height="140px" width="180px">
+      </span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

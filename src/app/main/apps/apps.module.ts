@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { FuseSharedModule } from '@fuse/shared.module';
+import {MatIconModule} from "@angular/material/icon";
+import { Memoria2Component } from './memoria2/memoria2.component';
 
 const routes = [
     {
@@ -45,20 +47,30 @@ const routes = [
         loadChildren: () => import('./file-manager/file-manager.module').then(m => m.FileManagerModule)
     },
     {
-        path        : 'contacts',
-        loadChildren: () => import('./contacts/contacts.module').then(m => m.ContactsModule)
+        path        : 'ahorcado',
+        loadChildren: () => import('./ahorcado/contacts.module').then(m => m.ContactsModule)
     },
     {
-        path        : 'scrumboard',
-        loadChildren: () => import('./scrumboard/scrumboard.module').then(m => m.ScrumboardModule)
+        path        : 'memoria',
+        loadChildren: () => import('./memoria/memoria.module').then(m => m.MemoriaModule)
+    },
+    {
+        path        : 'memoria2',
+        loadChildren: () => import('./memoria2/memoria2.module').then(m => m.Memoria2Module)
+    },
+    {
+        path        : 'home',
+        loadChildren: () => import('./welcome/scrumboard.module').then(m => m.ScrumboardModule)
     }
 ];
 
 @NgModule({
-    imports     : [
+    imports: [
         RouterModule.forChild(routes),
-        FuseSharedModule
-    ]
+        FuseSharedModule,
+        MatIconModule
+    ],
+    declarations: []
 })
 export class AppsModule
 {

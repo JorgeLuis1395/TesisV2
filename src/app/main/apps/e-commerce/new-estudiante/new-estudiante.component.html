@@ -1,0 +1,287 @@
+<div id="product" class="page-layout carded fullwidth inner-scroll">
+    <div class="header accent" fxLayout="row" fxLayoutAlign="space-between center">
+
+        <!-- APP TITLE -->
+        <div fxLayout="row" fxLayoutAlign="start center">
+
+            <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="'/apps/e-commerce/products'">
+                <mat-icon>arrow_back</mat-icon>
+            </button>
+
+        </div>
+        <!-- / APP TITLE -->
+
+        <button mat-raised-button
+                class="save-product-button"
+                [disabled]="usuarioForm.invalid"
+                (click)="saveEtudiante()">
+            <span>ADD</span>
+        </button>
+
+    </div>
+    <div class="content-card">
+
+        <!-- CONTENT -->
+        <div class="content">
+
+            <form name="productForm"  class="product w-100-p" fxLayout="column" fxFlex>
+
+                <mat-tab-group>
+
+                    <mat-tab label="Basic Info">
+
+                        <div class="tab-content p-24" fusePerfectScrollbar>
+
+                            <div class="card-body">
+                                <div class="row register-form">
+                                    <form>
+                                        <div class="form-group" enctype="multipart/form-data">
+                                            <div class="row">
+                                                <div class="col-sm-8"></div>
+                                                <div class="col-sm-4">
+                                                    <img [src]="imgURL" height="200" *ngIf="imgURL">
+                                                    <input #file type="file" accept='image/*'
+                                                           (change)="onFileChange($event)" #fileInput
+                                                           accept=".jpeg,.jpg" (change)="preview(file.files)"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" formControlName="nomUsu"
+                                                           [(ngModel)]="nombre" name="nombre"
+                                                           id="nombreUsuario" placeholder="Nombre *"
+                                                           (keypress)="_validacionService.letrasNumeros($event, 'l')"/>
+                                                    <div
+                                                        *ngIf="usuarioForm.get('nomUsu').errors && usuarioForm.get('nomUsu').dirty"
+                                                        class="text-danger">
+                                                            <span
+                                                                *ngIf="usuarioForm.get('nomUsu').hasError('required')">*Campo obligatorio<br></span>
+                                                        <span
+                                                            *ngIf="usuarioForm.get('nomUsu').hasError('minlength')">*Mínimo 3 caracteres<br></span>
+                                                        <span
+                                                            *ngIf="usuarioForm.get('nomUsu').hasError('maxlength')">*Máximo 30 caracteres</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" formControlName="ape"
+                                                           [(ngModel)]="apellido" name="apellido"
+                                                           id="apellidoUsuario" placeholder="Apellido*"
+                                                           (keypress)="_validacionService.letrasNumeros($event, 'l')"/>
+                                                    <div
+                                                        *ngIf="usuarioForm.get('ape').errors && usuarioForm.get('ape').dirty"
+                                                        class="text-danger">
+                                                        <span *ngIf="usuarioForm.get('ape').hasError('required')">*Campo obligatorio<br></span>
+                                                        <span *ngIf="usuarioForm.get('ape').hasError('minlength')">*Mínimo 3 caracteres<br></span>
+                                                        <span *ngIf="usuarioForm.get('ape').hasError('maxlength')">*Máximo 30 caracteres</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <label>Fecha Nacimiento</label>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <input type="date" class="form-control" formControlName="fecNac"
+                                                           [(ngModel)]="fecha_nacimiento"/>
+                                                    <div
+                                                        *ngIf="usuarioForm.get('fecNac').errors && usuarioForm.get('fecNac').dirty"
+                                                        class="text-danger">
+                                                            <span
+                                                                *ngIf="usuarioForm.get('fecNac').hasError('required')">*Campo obligatorio<br></span>
+                                                        <span *ngIf="usuarioForm.get('fecNac').hasError('mayor')">*El usuario es menor de edad</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" formControlName="ced"
+                                                           placeholder="Cédula *" [(ngModel)]="cedula"
+                                                           name="cedula" id="cedulaUsuario"
+                                                           (keypress)="_validacionService.letrasNumeros($event, 'n')"/>
+                                                    <div
+                                                        *ngIf="usuarioForm.get('ced').errors && usuarioForm.get('ced').dirty"
+                                                        class="text-danger">
+                                                        <span *ngIf="usuarioForm.get('ced').hasError('required')">*Campo obligatorio<br></span>
+                                                        <span *ngIf="usuarioForm.get('ced').hasError('estado')">*La cédula o RUC es incorrecta<br></span>
+                                                        <span *ngIf="usuarioForm.get('ced').hasError('taman')">*Debe contener 10 o 13 caracteres</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <input type="text" style="text-transform: none"
+                                                           class="form-control" formControlName="ema"
+                                                           placeholder="Correo Electrónico *"
+                                                           [(ngModel)]="email" name="email" id="emailUsuario"/>
+                                                    <div
+                                                        *ngIf="usuarioForm.get('ema').errors && usuarioForm.get('ema').dirty"
+                                                        class="text-danger">
+                                                        <span *ngIf="usuarioForm.get('ema').hasError('required')">*Campo obligatorio<br></span>
+                                                        <span *ngIf="usuarioForm.get('ema').hasError('email')">*Correo Incorrecto<br></span>
+                                                        <span *ngIf="usuarioForm.get('ema').hasError('minlength')">*Mínimo 10 caracteres<br></span>
+                                                        <span *ngIf="usuarioForm.get('ema').hasError('maxlength')">*Máximo 50 caracteres</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" formControlName="numCon"
+                                                           [(ngModel)]="telefono"
+                                                           placeholder="Número de Contacto" name="contacto"
+                                                           id="contactoUsuario"
+                                                           (keypress)="_validacionService.letrasNumeros($event, 'n')"/>
+                                                    <div
+                                                        *ngIf="usuarioForm.get('numCon').errors && usuarioForm.get('numCon').dirty"
+                                                        class="text-danger">
+                                                            <span
+                                                                *ngIf="usuarioForm.get('numCon').hasError('required')">*Campo obligatorio<br></span>
+                                                        <span
+                                                            *ngIf="usuarioForm.get('numCon').hasError('minlength')">*Mínimo 9 caracteres<br></span>
+                                                        <span
+                                                            *ngIf="usuarioForm.get('numCon').hasError('maxlength')">*Máximo 15 caracteres</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <input type="text" style="text-transform: none"
+                                                           class="form-control" formControlName="nic"
+                                                           [(ngModel)]="nick" id="nickUsuario" name="nickUsuario"
+                                                           placeholder="Nick * "
+                                                           (keypress)="_validacionService.letrasNumeros($event, 't')"/>
+                                                    <div
+                                                        *ngIf="usuarioForm.get('nic').errors && usuarioForm.get('nic').dirty"
+                                                        class="text-danger">
+                                                        <span *ngIf="usuarioForm.get('nic').hasError('required')">*Campo obligatorio<br></span>
+                                                        <span *ngIf="usuarioForm.get('nic').hasError('minlength')">*Mínimo 3 caracteres<br></span>
+                                                        <span *ngIf="usuarioForm.get('nic').hasError('maxlength')">*Máximo 30 caracteres</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <div class="form-group">
+                                                        <input type="number" class="form-control"
+                                                               [(ngModel)]="grado" formControlName="grado"
+                                                               name="grado"
+                                                               (keypress)="_validacionService.letrasNumeros($event, 'n')"
+                                                               placeholder="Año de Educacion Básica *" value=""/>
+                                                        <div
+                                                            *ngIf="usuarioForm.get('grado').errors && usuarioForm.get('grado').dirty"
+                                                            class="text-danger">
+                                                                <span
+                                                                    *ngIf="usuarioForm.get('grado').hasError('grado')">*Campo obligatorio</span>
+                                                            <span
+                                                                *ngIf="usuarioForm.get('grado').hasError('minlength')">*Mínimo 1 caracteres<br></span>
+                                                            <span
+                                                                *ngIf="usuarioForm.get('grado').hasError('maxlength')">*Máximo 2 caracteres</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <label>Código Estudiante</label>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <div class="form-group">
+                                                    <input type="text" readonly class="form-control"
+                                                           [(ngModel)]="codigo_estudiante"
+                                                           name="codigo_estudiante"
+                                                           placeholder="{{codigo_estudiante}}">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <div class="form-group">
+                                                    <button type="button" class="btn bg-warning"
+                                                            (click)="generarCodigo()"> Generar Codigo
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" formControlName="uniedu"
+                                                           [(ngModel)]="unidad_educativa"
+                                                           name="unidadeducativa" id="unidadeducativa"
+                                                           placeholder="Unidad Educativa *"
+                                                           (keypress)="_validacionService.letrasNumeros($event, 'l')"/>
+                                                    <div
+                                                        *ngIf="usuarioForm.get('uniedu').errors && usuarioForm.get('uniedu').dirty"
+                                                        class="text-danger">
+                                                            <span
+                                                                *ngIf="usuarioForm.get('uniedu').hasError('required')">*Campo obligatorio<br></span>
+                                                        <span
+                                                            *ngIf="usuarioForm.get('uniedu').hasError('minlength')">*Mínimo 3 caracteres<br></span>
+                                                        <span
+                                                            *ngIf="usuarioForm.get('uniedu').hasError('maxlength')">*Máximo 30 caracteres</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <input type="password" style="text-transform: none"
+                                                           class="form-control" formControlName="pas"
+                                                           placeholder="Contraseña"
+                                                           [(ngModel)]="password" name="password1"
+                                                           id="passwordUsuario"/>
+                                                    <div
+                                                        *ngIf="usuarioForm.get('pas').errors && usuarioForm.get('pas').dirty"
+                                                        class="text-danger">
+                                                        <span *ngIf="usuarioForm.get('pas').hasError('required')">*Campo obligatorio<br></span>
+                                                        <span *ngIf="usuarioForm.get('pas').hasError('minlength')">*Mínimo 9 caracteres<br></span>
+                                                        <span *ngIf="usuarioForm.get('pas').hasError('maxlength')">*Máximo 256 caracteres</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <input type="password" style="text-transform: none"
+                                                           class="form-control" formControlName="pas2"
+                                                           placeholder="Repita la contraeña"
+                                                           [(ngModel)]="password2" name="passwordConfirmarUsuario"
+                                                           id="passwordConfirmarUsuario"/>
+                                                    <div
+                                                        *ngIf="usuarioForm.get('pas2').errors && usuarioForm.get('pas2').dirty"
+                                                        class="text-danger">
+                                                        <span *ngIf="usuarioForm.get('pas2').hasError('required')">*Campo obligatorio<br></span>
+                                                        <span *ngIf="usuarioForm.get('pas2').hasError('minlength')">*Mínimo 9 caracteres<br></span>
+                                                        <span *ngIf="usuarioForm.get('pas2').hasError('maxlength')">*Máximo 256 caracteres</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <button type="button" class="btn btn-outline-primary"
+                                                        (click)="saveEtudiante()">Registrar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-tab>
+                </mat-tab-group>
+            </form>
+        </div>
+    </div>
+</div>

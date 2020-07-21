@@ -1,0 +1,83 @@
+@import "src/@fuse/scss/fuse";
+
+scrumboard {
+    min-height: 100%;
+
+    #boards {
+        width: 100%;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+
+
+
+        .header {
+
+            h1 {
+                font-size: 40px;
+                font-weight: 300;
+            }
+        }
+
+        .board-list {
+            padding: 32px 0;
+            max-height: none !important;
+
+            .board-list-item {
+                min-width: 400px;
+                width: 400px;
+                height: 550px;
+                padding: 24px 0;
+                margin: 16px;
+                border-radius: 8px;
+                background: rgba(28, 12, 12, 0.78);
+                transition: box-shadow 150ms ease-in;
+                cursor: pointer;
+
+                &:hover:not(.add-new-board) {
+                    @include mat-elevation(8);
+                }
+
+                .board-name {
+                    padding: 16px 32px 0 32px;
+                    font-weight: 300;
+                    font-size: 16px;
+                    text-align: center;
+                }
+
+                &.add-new-board {
+                    background: rgba(0, 0, 0, 0.06);
+                    border: 2px dashed rgba(255, 255, 255, 0.37);
+                }
+            }
+        }
+    }
+}
+.stiloFondoProf{
+    background-image: url('~assets/images/backgrounds/fondoProf2.jpeg');
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+
+}
+.stiloFondoEst{
+    background-image: url('~assets/images/backgrounds/fondoProf2.jpeg');
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+
+}
+
+.stiloFondoSn{
+    background-image: url('~assets/images/backgrounds/foto_fondo1_01.jpg');
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+
+}
+

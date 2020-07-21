@@ -19,14 +19,16 @@ import { AgmCoreModule } from '@agm/core';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { FuseWidgetModule } from '@fuse/components/widget/widget.module';
 
-import { EcommerceProductsComponent } from 'app/main/apps/e-commerce/products/products.component';
-import { EcommerceProductsService } from 'app/main/apps/e-commerce/products/products.service';
+import { EcommerceProductsComponent } from 'app/main/apps/e-commerce/lista_estudiantes/products.component';
+import { EcommerceProductsService } from 'app/main/apps/e-commerce/lista_estudiantes/products.service';
 import { EcommerceProductComponent } from 'app/main/apps/e-commerce/product/product.component';
 import { EcommerceProductService } from 'app/main/apps/e-commerce/product/product.service';
 import { EcommerceOrdersComponent } from 'app/main/apps/e-commerce/orders/orders.component';
 import { EcommerceOrdersService } from 'app/main/apps/e-commerce/orders/orders.service';
 import { EcommerceOrderComponent } from 'app/main/apps/e-commerce/order/order.component';
 import { EcommerceOrderService } from 'app/main/apps/e-commerce/order/order.service';
+import { NewEstudianteComponent } from './new-estudiante/new-estudiante.component';
+import {InformacionEstudianteService} from "../../servicios/informacion-estudiante.service";
 
 const routes: Routes = [
     {
@@ -35,6 +37,13 @@ const routes: Routes = [
         resolve  : {
             data: EcommerceProductsService
         }
+    },
+    {
+        path     : 'estudiante',
+        component: NewEstudianteComponent
+
+        ,
+
     },
     {
         path     : 'products/:id',
@@ -71,7 +80,8 @@ const routes: Routes = [
         EcommerceProductsComponent,
         EcommerceProductComponent,
         EcommerceOrdersComponent,
-        EcommerceOrderComponent
+        EcommerceOrderComponent,
+        NewEstudianteComponent
     ],
     imports     : [
         RouterModule.forChild(routes),
@@ -102,7 +112,8 @@ const routes: Routes = [
         EcommerceProductsService,
         EcommerceProductService,
         EcommerceOrdersService,
-        EcommerceOrderService
+        EcommerceOrderService,
+        InformacionEstudianteService,
     ]
 })
 export class EcommerceModule

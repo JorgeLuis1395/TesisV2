@@ -1,0 +1,231 @@
+<!-- BOARDS -->
+<div id="boards" class="stiloFondoProf" fxLayout="column" fxLayoutAlign="start center" fxFlex fusePerfectScrollbar *ngIf="rol === 'PROFESOR'">
+<!--
+    <div class="header pt-44 pt-md-88" fxLayout="row" fxLayoutAlign="center center" fxFlex="0 0 auto"
+         [@animate]="{value:'*',params:{delay:'100ms'}}">
+        <h1>Scrumboard App</h1>
+    </div>-->
+
+    <!-- BOARD LIST -->
+    <div class="board-list" fxFlex="0 0 auto" fxLayout="row wrap" fxLayoutAlign="center center"
+         [@animateStagger]="{value:'50'}">
+
+        <!-- BOARD -->
+        <div class="board-list-item"
+             fxLayout="column" fxLayoutAlign="center center"
+             [@animate]="{value:'*',params:{y:'100%'}}" style="color: white">
+            <mat-icon class="s-56" style="color: white">info</mat-icon>
+            <div class="board-name">
+               <h2>INFORMACIÓN</h2>
+            </div>
+            <div class="board-name">
+                <p class="card-text" align="justify">En este módulo encontrará información relevante sobre la
+                    Dislexia formas de tratar, evaluar, etc.</p>
+                <a class="dropdown-item" routerLink="/ui/page-layouts/dislexia1"><b>¿Qué es la Dislexia?</b></a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" routerLink="/ui/page-layouts/dislexia2"><b>Protocolos de detección Dislexia
+                </b></a><div class="dropdown-divider"></div>
+                <a class="dropdown-item" routerLink="/ui/page-layouts/dislexia4"><b>Adaptaciones generales para alumnos
+                </b></a><div class="dropdown-divider"></div>
+                <a class="dropdown-item" routerLink="/ui/page-layouts/dislexia3"><b>Adaptaciones generales para examenes</b>
+                </a><div class="dropdown-divider"></div>
+                <a class="dropdown-item" routerLink="/ui/page-layouts/dislexia5"><b>7 Pasos para detectar la Dislexia</b></a>
+                <div class="dropdown-divider"></div>
+            </div>
+        </div>
+
+        <div class="board-list-item"
+             fxLayout="column" fxLayoutAlign="center center"
+             [@animate]="{value:'*',params:{y:'100%'}}" style="color: white" >
+            <mat-icon class="s-56">school</mat-icon>
+            <div class="board-name">
+                <h2>ESTUDIANTES</h2>
+            </div>
+            <div class="board-name">
+                <p class="card-text" align="justify">El módulo le permite ingresar información relevante de los
+                    estudiantes como:</p>
+                <a class="dropdown-item" routerLink="/profesor/calificacion"> <i class="fas fa-sort-numeric-up"></i>
+                    <b> Calificaciones</b></a><div class="dropdown-divider"></div>
+                <a class="dropdown-item" routerLink="/profesor/nuevo/estudiante"> <i class="fas fa-child"> </i>
+                    <b> Registro Nuevo Estudiante</b></a><div class="dropdown-divider"></div>
+                <a class="dropdown-item" routerLink="/apps/e-commerce/products"><i class="fas fa-list-ul"></i>
+                    <b> Lista</b></a><div class="dropdown-divider"></div>
+            </div>
+        </div>
+
+        <div class="board-list-item"
+             fxLayout="column" fxLayoutAlign="center center"
+             [@animate]="{value:'*',params:{y:'100%'}}" style="color: white">
+            <mat-icon class="s-56">calendar_today</mat-icon>
+            <div class="board-name">
+                <h2>AGENDA</h2>
+            </div>
+            <div class="board-name">
+                <p class="card-text" align="justify">En este módulo permite visualizar citas con padres, reuniones
+                    que el profesor, registro en el calendario</p>
+                <a class="dropdown-item" routerLink="/profesor/agenda"><b>Nueva Cita</b></a>
+                <div class="dropdown-divider"></div>
+                <div class="dropdown-divider"></div>
+            </div>
+        </div>
+        <!-- / BOARD -->
+
+        <!-- NEW BOARD BUTTON -->
+
+        <!-- / NEW BOARD BUTTON -->
+
+    </div>
+    <!-- / BOARD LIST -->
+</div>
+<!-- / BOARDS -->
+<!-- BOARDS -->
+<div id="boards" class="stiloFondoEst" fxLayout="column" fxLayoutAlign="start center" fxFlex fusePerfectScrollbar *ngIf="rol === 'ESTUDIANTE'">
+    <!--
+        <div class="header pt-44 pt-md-88" fxLayout="row" fxLayoutAlign="center center" fxFlex="0 0 auto"
+             [@animate]="{value:'*',params:{delay:'100ms'}}">
+            <h1>Scrumboard App</h1>
+        </div>-->
+
+    <!-- BOARD LIST -->
+    <div class="board-list" fxFlex="0 0 auto" fxLayout="row wrap" fxLayoutAlign="center center"
+         [@animateStagger]="{value:'50'}">
+
+        <!-- BOARD -->
+        <div class="board-list-item"
+             fxLayout="column" fxLayoutAlign="center center"
+             [@animate]="{value:'*',params:{y:'100%'}}" style="color: white">
+            <mat-icon class="s-56" style="color: white">info</mat-icon>
+            <div class="board-name">
+                <h2>INFORMACIÓN</h2>
+            </div>
+            <div class="board-name">
+                <p class="card-text" align="justify">En este módulo encontrará información relevante sobre la
+                    Dislexia formas de tratar, evaluar, etc.</p>
+                <a class="dropdown-item" routerLink="/ui/page-layouts/dislexia1"><b>¿Qué es la Dislexia?</b></a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" routerLink="/ui/page-layouts/dislexia2"><b>Protocolos de detección Dislexia
+                </b></a><div class="dropdown-divider"></div>
+                <a class="dropdown-item" routerLink="/ui/page-layouts/dislexia4"><b>Adaptaciones generales para alumnos
+                </b></a><div class="dropdown-divider"></div>
+                <a class="dropdown-item" routerLink="/ui/page-layouts/dislexia3"><b>Adaptaciones generales para examenes</b>
+                </a><div class="dropdown-divider"></div>
+                <a class="dropdown-item" routerLink="/ui/page-layouts/dislexia5"><b>7 Pasos para detectar la Dislexia</b></a>
+                <div class="dropdown-divider"></div>
+            </div>
+        </div>
+
+        <div class="board-list-item"
+             fxLayout="column" fxLayoutAlign="center center"
+             [@animate]="{value:'*',params:{y:'100%'}}" style="color: white" >
+            <mat-icon class="s-56">category</mat-icon>
+            <div class="board-name">
+                <h2>RECURSOS</h2>
+            </div>
+            <div class="board-name">
+                <p class="card-text" align="justify">El módulo contiene recursos didácticos para
+                    ayudar a mejorar la dislexia que se encuentra presente en los niños:</p>
+
+                <a class="dropdown-item" routerLink="/general/cuentos"><i class="fas fa-book-open"></i> <b> Cuentos</b></a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" routerLink="/general/juegos/ahorcado"> <i class="fab fa-playstation"></i> <b> Ahorcado</b></a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" routerLink="/general/juegos/memoria"> <i class="fab fa-playstation"></i> <b> Memoria</b></a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" routerLink="/general/videos"><i class="fab fa-youtube"></i> <b> Videos</b></a><div class="dropdown-divider"></div>
+                <a class="dropdown-item" routerLink="/general/imagenes"><i class="fas fa-images"></i> <b> Imagenes</b></a><div class="dropdown-divider"></div>
+
+            </div>
+        </div>
+
+        <div class="board-list-item"
+             fxLayout="column" fxLayoutAlign="center center"
+             [@animate]="{value:'*',params:{y:'100%'}}" style="color: white">
+            <mat-icon class="s-56">computer</mat-icon>
+            <div class="board-name">
+                <h2>TRATAMIENTO</h2>
+            </div>
+            <div class="board-name">
+                <p class="card-text" align="justify">El módulo le permite realizar un test para determinar el nivel y
+                    tipo de dislexia que tiene el estudiante:</p>
+                <a class="dropdown-item" routerLink="/estudiante/pre_diagnostico"><i class="fas fa-sort-numeric-up"></i><b> Test
+                    Completo</b></a>
+            </div>
+        </div>
+        <!-- / BOARD -->
+
+        <!-- NEW BOARD BUTTON -->
+
+        <!-- / NEW BOARD BUTTON -->
+
+    </div>
+    <!-- / BOARD LIST -->
+</div>
+<!-- / BOARDS -->
+<!-- BOARDS -->
+<div id="boards" class="stiloFondoSn" fxLayout="column" fxLayoutAlign="start center" fxFlex fusePerfectScrollbar *ngIf="rol === 'INVITADO'">
+    <!--
+        <div class="header pt-44 pt-md-88" fxLayout="row" fxLayoutAlign="center center" fxFlex="0 0 auto"
+             [@animate]="{value:'*',params:{delay:'100ms'}}">
+            <h1>Scrumboard App</h1>
+        </div>-->
+
+    <!-- BOARD LIST -->
+    <div class="board-list" fxFlex="0 0 auto" fxLayout="row wrap" fxLayoutAlign="center center"
+         [@animateStagger]="{value:'50'}">
+
+        <!-- BOARD -->
+        <div class="board-list-item"
+             fxLayout="column" fxLayoutAlign="center center"
+             [@animate]="{value:'*',params:{y:'100%'}}" style="color: white">
+            <mat-icon class="s-56" style="color: white">category</mat-icon>
+            <div class="board-name">
+                <h2>INFORMACIÓN</h2>
+            </div>
+            <div class="board-name">
+                <p class="card-text" align="justify">En este módulo encontrará información relevante sobre la
+                    Dislexia formas de tratar, evaluar, etc.</p>
+                <a class="dropdown-item" routerLink="/ui/page-layouts/dislexia1"><b>¿Qué es la Dislexia?</b></a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" routerLink="/ui/page-layouts/dislexia2"><b>Protocolos de detección Dislexia
+                </b></a><div class="dropdown-divider"></div>
+                <a class="dropdown-item" routerLink="/ui/page-layouts/dislexia4"><b>Adaptaciones generales para alumnos
+                </b></a><div class="dropdown-divider"></div>
+                <a class="dropdown-item" routerLink="/ui/page-layouts/dislexia3"><b>Adaptaciones generales para examenes</b>
+                </a><div class="dropdown-divider"></div>
+                <a class="dropdown-item" routerLink="/ui/page-layouts/dislexia5"><b>7 Pasos para detectar la Dislexia</b></a>
+                <div class="dropdown-divider"></div>
+            </div>
+        </div>
+
+        <div class="board-list-item"
+             fxLayout="column" fxLayoutAlign="center center"
+             [@animate]="{value:'*',params:{y:'100%'}}" style="color: white" >
+            <mat-icon class="s-56">school</mat-icon>
+            <div class="board-name">
+                <h2>RECURSOS</h2>
+            </div>
+            <div class="board-name">
+                <p class="card-text" align="justify">El módulo contiene recursos didácticos para
+                    ayudar a mejorar la dislexia que se encuentra presente en los niños:</p>
+
+                <a class="dropdown-item" routerLink="/general/cuentos"><i class="fas fa-book-open"></i> <b> Cuentos</b></a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" routerLink="/apps/ahorcado"> <i class="fab fa-playstation"></i> <b> Ahorcado</b></a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" routerLink="/general/juegos/memoria"> <i class="fab fa-playstation"></i> <b> Memoria</b></a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" routerLink="/general/videos"><i class="fab fa-youtube"></i> <b> Videos</b></a><div class="dropdown-divider"></div>
+                <a class="dropdown-item" routerLink="/general/imagenes"><i class="fas fa-images"></i> <b> Imagenes</b></a><div class="dropdown-divider"></div>
+
+            </div>
+        </div>
+        <!-- / BOARD -->
+
+        <!-- NEW BOARD BUTTON -->
+
+        <!-- / NEW BOARD BUTTON -->
+
+    </div>
+    <!-- / BOARD LIST -->
+</div>
+<!-- / BOARDS -->

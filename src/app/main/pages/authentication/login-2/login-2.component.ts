@@ -30,7 +30,6 @@ export class Login2Component implements OnInit {
     tipo_usuario: string;
     profesor?
     estudiante?
-    //config: any;
 
     constructor(public _usuario: UsuarioService, private _login: LoginService,
                 private _router: Router,
@@ -45,9 +44,8 @@ export class Login2Component implements OnInit {
                 private _translateService: TranslateService,
                 private readonly _usuarioService: UsuarioService,
     ) {
-
-        // Configure the layout
         this._fuseConfigService.config = {
+            colorTheme: 'theme-default',
             layout: {
                 navbar: {
                     hidden: true
@@ -63,6 +61,7 @@ export class Login2Component implements OnInit {
                 }
             }
         };
+
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -93,7 +92,6 @@ export class Login2Component implements OnInit {
     }
 
 
-
     select() {
         console.log(this.tipo_usuario)
     }
@@ -108,11 +106,12 @@ export class Login2Component implements OnInit {
 
     sendLogin() {
         let aux: any;
-        const login= this.loginForm.value;
+        const login = this.loginForm.value;
         this._login.postLogin(login.nick, login.password).then((result) => {
             aux = result
             console.log(result)
-            environment.nick = this.usuario;
+            environment.nick = login.nick
+            environment.profesor = aux;
             environment.tokenUsuario = aux.jwt;
             this.getProfesor(login.nick)
         }, (err) => {
@@ -121,9 +120,10 @@ export class Login2Component implements OnInit {
     }
 
     sendLoginEstudiante() {
-        const login= this.loginForm.value;
+        const login = this.loginForm.value;
         this._login.postLoginEstudiante(login.nick, login.password).then((result) => {
-            environment.nick = this.usuario;
+            environment.nick = login.nick;
+            environment.estudiante = result;
             //environment.tokenUsuario = Object.values(result)[0];
             this.getEstudiante()
         }, (err) => {
@@ -131,15 +131,24 @@ export class Login2Component implements OnInit {
         });
     }
 
+    getSinRegistro() {
+        environment.rol = 'INVITADO'
+        const rutaHomeUsuario = [
+            '/apps/home/welcome',
+        ];
+        this._router.navigate(rutaHomeUsuario);
+    }
+
     getProfesor(nick) {
         this._usuario.getUsuario(nick).then(data => {
             console.log(data)
             this.usuario = data;
-            environment.profesor= this.usuario;
+            environment.profesor = this.usuario;
+            environment.rol = 'PROFESOR'
             environment.idProfesorRegistrado = this.usuario.id;
-
+            this.registerNewNavigationAndToggle();
             const rutaHomeUsuario = [
-                '/apps/dashboards/project',
+                '/apps/home/welcome',
             ];
             this._router.navigate(rutaHomeUsuario);
         });
@@ -148,7 +157,7 @@ export class Login2Component implements OnInit {
     getEstudiante() {
         this._usuario.getEstudiante().then(data => {
             this.usuario = data;
-            environment.estudiante= this.usuario;
+            environment.estudiante = this.usuario;
             environment.idEstudianteRegistrado = this.usuario.id;
             const rutaHomeUsuario = [
                 '/estudiante/wellcome',
@@ -156,6 +165,7 @@ export class Login2Component implements OnInit {
             this._router.navigate(rutaHomeUsuario);
         });
     }
+
     async seleccionPerfil() {
 
         const {value: perfil} = await Swal.fire({
@@ -197,17 +207,111 @@ export class Login2Component implements OnInit {
         })
     }
 
-    private checkUserIsVerified(user: UserInterface) {
-        /*if (user && user.emailVerified) {
-            this.router.navigate(['/apps/academy/courses']);
-        } else if (user) {
-            this.router.navigate(['/verification-email']);
-        } else {
-            this.router.navigate(['/pages/auth/register']);
-        }*/
+    registerNewNavigationAndToggle(): void {
+        const adminNav = [
+            {
+                id: 'admin',
+                title: 'DISLEXIA',
+                type: 'group',
+                icon: 'apps',
+                children: [
+                    {
+                        id: 'dislexia1',
+                        title: 'Que es la Dislexia',
+                        type: 'item',
+                        icon: 'filter_1',
+                        url: '/ui/page-layouts/dislexia1',
+                    },
+                    {
+                        id: 'dislexia2',
+                        title: 'PRODISLEX',
+                        type: 'item',
+                        icon: 'filter_2',
+                        url: '/ui/page-layouts/dislexia2'
+                    },
+                    {
+                        id: 'dislexia3',
+                        title: 'Adaptaciones generales para alumnos',
+                        type: 'item',
+                        icon: 'filter_3',
+                        url: '/ui/page-layouts/dislexia4'
+                    },
+                    {
+                        id: 'dislexia4',
+                        title: 'Adaptaciones generales para exámenes',
+                        type: 'item',
+                        icon: 'filter_4',
+                        url: '/ui/page-layouts/dislexia3'
+                    },
+                    {
+                        id: 'dislexia5',
+                        title: '7 Pasos para detectar la Dislexia',
+                        type: 'item',
+                        icon: 'filter_5',
+                        url: '/ui/page-layouts/dislexia5'
+                    }
+                ]
+            },
+            {
+                id: 'control-panel',
+                title: 'ESTUDIANTES',
+                type: 'group',
+                icon: 'supervised_user_circle',
+                children: [
+                    {
+                        id: 'cron-jobs',
+                        title: 'Calificaciones',
+                        type: 'item',
+                        icon: 'spellcheck',
+                        url: '/apps/file-manager'
+                    },
+                    {
+                        id: 'maintenance-mode',
+                        title: 'Lista',
+                        type: 'item',
+                        icon: 'format_list_numbered',
+                        url: '/apps/e-commerce/products'
+                    }
+                ]
+            },
+            {
+                id: 'agenda',
+                title: 'AGENDA',
+                type: 'group',
+                icon: 'calendar_today',
+                url: '/apps/todo'
+            },
+
+            {
+                id: 'perfil',
+                title: 'PERFIL',
+                type: 'group',
+                icon: 'apps',
+                children: [
+                    {
+                        id: 'cron-jobs',
+                        title: 'Cron Jobs',
+                        type: 'item',
+                        icon: 'settings',
+                        url: '/apps/file-manager'
+                    },
+                    {
+                        id: 'maintenance-mode',
+                        title: 'Maintenance Mode',
+                        type: 'item',
+                        icon: 'build',
+                        url: '/apps/todo'
+                    }
+                ]
+            }
+        ];
+
+        // Register the new navigation
+        this._fuseNavigationService.register('admin-nav', adminNav);
+
+        // Set the current navigation
+        this._fuseNavigationService.setCurrentNavigation('admin-nav');
     }
 
-    resolved(captchaResponse: string) {
-    }
 
 }
