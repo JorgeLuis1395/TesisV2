@@ -3,8 +3,7 @@ import { RouterModule } from '@angular/router';
 
 import { FuseSharedModule } from '@fuse/shared.module';
 import {MatIconModule} from "@angular/material/icon";
-import { CuentosComponent } from './cuentos/cuentos.component';
-import { VideosComponent } from './videos/videos.component';
+import {MatCardModule} from "@angular/material/card";
 
 const routes = [
     {
@@ -56,6 +55,10 @@ const routes = [
         loadChildren: () => import('./cuentos/cuentos.module').then(m => m.CuentosModule)
     },
     {
+        path        : 'videos',
+        loadChildren: () => import('./videos/videos.module').then(m => m.VideosModule)
+    },
+    {
         path        : 'imagenes',
         loadChildren: () => import('./imagenes/imagenes.module').then(m => m.ImagenesModule)
     },
@@ -69,9 +72,10 @@ const routes = [
     imports: [
         RouterModule.forChild(routes),
         FuseSharedModule,
-        MatIconModule
+        MatIconModule,
+        MatCardModule
     ],
-    declarations: [VideosComponent]
+    declarations: []
 })
 export class AppsModule
 {
