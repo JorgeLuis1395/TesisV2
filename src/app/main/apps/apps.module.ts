@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 
 import { FuseSharedModule } from '@fuse/shared.module';
 import {MatIconModule} from "@angular/material/icon";
-import { CuentosComponent } from './cuentos/cuentos.component';
+import { CuentosComponent } from './imagenes/cuentos.component';
 
 const routes = [
     {
@@ -52,7 +52,7 @@ const routes = [
     },
     {
         path        : 'cuentos',
-        loadChildren: () => import('./cuentos/cuentos.module').then(m => m.CuentosModule)
+        loadChildren: () => import('./imagenes/cuentos.module').then(m => m.CuentosModule)
     },
     {
         path        : 'home',
