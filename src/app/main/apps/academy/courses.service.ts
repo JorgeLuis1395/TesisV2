@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
+import {UsuarioService} from "../../servicios/usuario.service";
 
 @Injectable()
 export class AcademyCoursesService implements Resolve<any>
@@ -13,9 +14,10 @@ export class AcademyCoursesService implements Resolve<any>
      * Constructor
      *
      * @param {HttpClient} _httpClient
+     * @param cuentos
      */
     constructor(
-        private _httpClient: HttpClient
+        private _httpClient: HttpClient, private cuentos: UsuarioService
     )
     {
         // Set the defaults
@@ -39,8 +41,7 @@ export class AcademyCoursesService implements Resolve<any>
         return new Promise((resolve, reject) => {
 
             Promise.all([
-                this.getCategories(),
-                this.getCourses()
+                this.getCuentos()
             ]).then(
                 () => {
                     resolve();
@@ -50,34 +51,20 @@ export class AcademyCoursesService implements Resolve<any>
         });
     }
 
-    /**
-     * Get categories
-     *
-     * @returns {Promise<any>}
-     */
-    getCategories(): Promise<any>
-    {
-        return new Promise((resolve, reject) => {
-            this._httpClient.get('api/academy-categories')
-                .subscribe((response: any) => {
-                    this.onCategoriesChanged.next(response);
-                    resolve(response);
-                }, reject);
-        });
+
+
+    aux: any;
+    ngOnInit() {
+        this.getCuentos();
     }
 
-    /**
-     * Get courses
-     *
-     * @returns {Promise<any>}
-     */
-    getCourses(): Promise<any>
+
+    getCuentos(): Promise<any>
     {
         return new Promise((resolve, reject) => {
-            this._httpClient.get('api/academy-courses')
-                .subscribe((response: any) => {
-                    this.onCoursesChanged.next(response);
-                    resolve(response);
+            this.cuentos.getCuentos().then(data => {
+                this.onCoursesChanged.next(data);
+                resolve(data);
                 }, reject);
         });
     }

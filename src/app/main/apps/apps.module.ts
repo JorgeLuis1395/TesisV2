@@ -3,7 +3,8 @@ import { RouterModule } from '@angular/router';
 
 import { FuseSharedModule } from '@fuse/shared.module';
 import {MatIconModule} from "@angular/material/icon";
-import { CuentosComponent } from './imagenes/cuentos.component';
+import { CuentosComponent } from './cuentos/cuentos.component';
+import { VideosComponent } from './videos/videos.component';
 
 const routes = [
     {
@@ -52,7 +53,11 @@ const routes = [
     },
     {
         path        : 'cuentos',
-        loadChildren: () => import('./imagenes/cuentos.module').then(m => m.CuentosModule)
+        loadChildren: () => import('./cuentos/cuentos.module').then(m => m.CuentosModule)
+    },
+    {
+        path        : 'imagenes',
+        loadChildren: () => import('./imagenes/imagenes.module').then(m => m.ImagenesModule)
     },
     {
         path        : 'home',
@@ -66,7 +71,7 @@ const routes = [
         FuseSharedModule,
         MatIconModule
     ],
-    declarations: []
+    declarations: [VideosComponent]
 })
 export class AppsModule
 {

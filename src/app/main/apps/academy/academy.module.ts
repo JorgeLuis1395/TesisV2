@@ -14,6 +14,7 @@ import { AcademyCourseComponent } from 'app/main/apps/academy/course/course.comp
 import { AcademyCoursesService } from 'app/main/apps/academy/courses.service';
 import { AcademyCourseService } from 'app/main/apps/academy/course.service';
 import { FuseSidebarModule } from '@fuse/components';
+import {MatCardModule} from "@angular/material/card";
 
 const routes = [
     {
@@ -24,7 +25,7 @@ const routes = [
         }
     },
     {
-        path     : 'courses/:courseId/:courseSlug',
+        path     : 'courses/:courseId',
         component: AcademyCourseComponent,
         resolve  : {
             academy: AcademyCourseService
@@ -41,7 +42,7 @@ const routes = [
         AcademyCoursesComponent,
         AcademyCourseComponent
     ],
-    imports     : [
+    imports: [
         RouterModule.forChild(routes),
 
         MatButtonModule,
@@ -51,7 +52,8 @@ const routes = [
         MatSelectModule,
 
         FuseSharedModule,
-        FuseSidebarModule
+        FuseSidebarModule,
+        MatCardModule
     ],
     providers   : [
         AcademyCoursesService,

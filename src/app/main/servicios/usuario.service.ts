@@ -32,9 +32,9 @@ export class UsuarioService {
     }
 
 
-    getCuentosId() {
+    getCuentosId(idCuento) {
         return new Promise(resolve => {
-            this.http.get(this.apiUrl + '/cuentos/'+ environment.idCuento,
+            this.http.get(this.apiUrl + '/cuentos/'+ idCuento,
                 {headers: new HttpHeaders({'Authorization': 'Bearer ' + environment.tokenUsuario})}).subscribe(data => {
                 resolve(data);
 
