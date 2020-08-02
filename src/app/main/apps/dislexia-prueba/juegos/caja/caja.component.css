@@ -1,0 +1,27 @@
+.container {
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+}
+
+.box1 {
+  display: inline-block;
+  padding: 10px;
+  width: 80px;
+  cursor: move;
+}
+
+.cajas{
+  border: 2px solid #333;
+  height: 45px;
+  width: 100%;
+}
+
+.tamanioLetra2 {
+  font-size: 35px;
+  margin-top: -10px;
+}
+
+.fondo{
+  background-color: #dee77d;
+}

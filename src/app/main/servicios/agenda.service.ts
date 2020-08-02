@@ -1,44 +1,45 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {VariablesGlobales} from './variables-globales';
 import {Agenda} from './interfaces';
 import {Observable} from 'rxjs';
+import {environment} from "../../../environments/environment";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class AgendaService {
 
-  urlFeriadoBusqueda = this.global.apiUrl + '/agenda';
+    urlFeriadoBusqueda = environment.url + '/agenda';
 
-  constructor(private http: HttpClient, private global: VariablesGlobales) {}
+    constructor(private http: HttpClient) {
+    }
 
-  ingresarFeriado(feriadoNuevo:Agenda){
-    const url = this.global.apiUrl + '/agenda';
-    var resultado = this.http.post<any>(url, feriadoNuevo, httpOptions);
-    return resultado;
-  }
+    ingresarFeriado(feriadoNuevo: Agenda) {
+        const url = environment.url + '/agenda';
+        var resultado = this.http.post<any>(url, feriadoNuevo, httpOptions);
+        return resultado;
+    }
 
-  mostrarFeriados(fechaFeriado): Observable<Agenda[]> {
-    return this.http.get<Agenda[]>(this.urlFeriadoBusqueda+"?"+fechaFeriado);
-  }
+    mostrarFeriados(fechaFeriado): Observable<Agenda[]> {
+        return this.http.get<Agenda[]>(this.urlFeriadoBusqueda + "?" + fechaFeriado);
+    }
 
-  updateFeriado(feriadoActualizado: Agenda, id): Observable<Agenda[]> {
+    updateFeriado(feriadoActualizado: Agenda, id): Observable<Agenda[]> {
 
-    let url = this.global.apiUrl+'/agenda';
-    return this.http.put<any>(url+"/"+id, feriadoActualizado)
-  }
+        let url = environment.url + '/agenda';
+        return this.http.put<any>(url + "/" + id, feriadoActualizado)
+    }
 
-  deleteFeriado(id){
-    let url = this.global.apiUrl+'/agenda';
-    return this.http.delete<any>(url+"/"+id)
-  }
+    deleteFeriado(id) {
+        let url = environment.url + '/agenda';
+        return this.http.delete<any>(url + "/" + id)
+    }
 
 }
 
 const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type':  'application/json'
-  })
+    headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+    })
 };
 

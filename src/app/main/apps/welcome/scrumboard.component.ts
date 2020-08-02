@@ -44,7 +44,7 @@ export class ScrumboardComponent implements OnInit, OnDestroy
      */
     ngOnInit(): void
     {
-        this.rol = environment.rol
+        this.rol = localStorage.getItem('rol')
 
     }
 

@@ -214,7 +214,26 @@
         <!-- / FUSE Splash Screen -->
 
         <app></app>
+        <script>
+            function allowDrop(ev) {
+                ev.preventDefault()
+                document.getElementById("caja1")
+            }
+
+            function drag(ev) {
+                ev.dataTransfer.setData("text", ev.target.id)
+            }
+
+            function drop(ev) {
+                ev.preventDefault()
+                var data = ev.dataTransfer.getData("text")
+                var ejem = ev.target.appendChild(document.getElementById(data))
+                document.getElementById("caja2")
+                //console.log(ejem)
+            }
+        </script>
 
     </body>
+
 
 </html>

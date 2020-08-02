@@ -129,15 +129,19 @@ export class AppComponent implements OnInit, OnDestroy {
                 this.fuseConfig = config;
                 console.log(this.fuseConfig, this._fuseConfigService)
 
-                if (environment.rol === 'PROFESOR') {
+                if (localStorage.getItem('rol') === 'PROFESOR') {
                     this.fuseConfig.colorTheme = 'theme-yellow-light';
                     this.fuseConfig.layout.style = 'horizontal-layout-1';
-                    this.fuseConfig.toolbar.position = 'above'
+                    this.fuseConfig.layout.navbar.primaryBackground = 'fuse-navy-50';
+                    this.fuseConfig.layout.toolbar.position = 'above';
+                    this.fuseConfig.layout.toolbar.hidden = false;
                 }
-                if (environment.rol === 'INVITADO') {
+                if (localStorage.getItem('rol') === 'INVITADO') {
                     this.fuseConfig.colorTheme = 'theme-blue-gray-dark';
                     this.fuseConfig.layout.style = 'horizontal-layout-1';
-                    this.fuseConfig.toolbar.hide = false;
+                    this.fuseConfig.layout.navbar.primaryBackground = 'fuse-navy-50';
+                    this.fuseConfig.layout.toolbar.position = 'above';
+                    this.fuseConfig.layout.toolbar.hidden = false;
                 }
 
                 // Boxed

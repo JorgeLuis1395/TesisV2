@@ -8,7 +8,6 @@ export const environment = {
     url: 'http://localhost:3000',
     id_usuario: 0,
     nombre_login: '',
-    rol: '',
     estado_usuario: false,
     estado_usuario_cuenta: false,
     nombres_usuario: '',
@@ -16,16 +15,14 @@ export const environment = {
     tokenKey: 'Amauta',
     nombreUsuario: '',
     fotoUsuario: '',
-    tokenUsuario: '',
+
     rolUsuario: 'Administrador',
     email: '',
     idProfesor: '',
-    nick: '',
+
     idCuento: '',
     idEstudiante: '',
-    idPuntaje: 0, estudiante: undefined,
-    idEstudianteRegistrado: undefined,
-    profesor: undefined,
+    idPuntaje: 0,
     idProfesorRegistrado: undefined
 
 };

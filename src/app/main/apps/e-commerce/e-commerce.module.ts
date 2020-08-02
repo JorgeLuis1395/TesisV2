@@ -27,36 +27,46 @@ import { EcommerceOrdersComponent } from 'app/main/apps/e-commerce/orders/orders
 import { EcommerceOrdersService } from 'app/main/apps/e-commerce/orders/orders.service';
 import { EcommerceOrderComponent } from 'app/main/apps/e-commerce/order/order.component';
 import { EcommerceOrderService } from 'app/main/apps/e-commerce/order/order.service';
-import { NewEstudianteComponent } from './new-estudiante/new-estudiante.component';
 import {InformacionEstudianteService} from "../../servicios/informacion-estudiante.service";
+import { CalificacionesComponent } from './calificaciones/calificaciones.component';
+import {CalificacionesService} from "./calificaciones/calificaciones.service";
+import { CalificacionesnewComponent } from './calificacionesnew/calificacionesnew.component';
+import {CalificacionesnewService} from "./calificacionesnew/calificacionesnew.service";
 
 const routes: Routes = [
     {
-        path     : 'products',
+        path     : 'estudiante',
         component: EcommerceProductsComponent,
         resolve  : {
             data: EcommerceProductsService
         }
     },
     {
-        path     : 'estudiante',
-        component: NewEstudianteComponent
-
-        ,
-
-    },
-    {
-        path     : 'products/:id',
+        path     : 'estudiante/:id',
         component: EcommerceProductComponent,
         resolve  : {
             data: EcommerceProductService
         }
     },
     {
-        path     : 'products/:id/:handle',
+        path     : 'estudiante/:id/:handle',
         component: EcommerceProductComponent,
         resolve  : {
             data: EcommerceProductService
+        }
+    },
+    {
+        path     : 'estudiante/calificaciones/:id/:handle',
+        component: CalificacionesComponent,
+        resolve  : {
+            data: CalificacionesService
+        }
+    },
+    {
+        path     : 'estudiante/calificaciones/:id/:handle/new',
+        component: CalificacionesnewComponent,
+        resolve  : {
+            data: CalificacionesnewService
         }
     },
     {
@@ -81,7 +91,8 @@ const routes: Routes = [
         EcommerceProductComponent,
         EcommerceOrdersComponent,
         EcommerceOrderComponent,
-        NewEstudianteComponent
+        CalificacionesComponent,
+        CalificacionesnewComponent,
     ],
     imports     : [
         RouterModule.forChild(routes),
@@ -114,6 +125,8 @@ const routes: Routes = [
         EcommerceOrdersService,
         EcommerceOrderService,
         InformacionEstudianteService,
+        CalificacionesService,
+        CalificacionesnewService,
     ]
 })
 export class EcommerceModule

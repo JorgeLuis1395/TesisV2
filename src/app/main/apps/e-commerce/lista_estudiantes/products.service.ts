@@ -54,7 +54,7 @@ export class EcommerceProductsService implements Resolve<any> {
         this.products = [];
         return new Promise((resolve, reject) => {
 
-            this.listaEstudiantes.getUsuario(environment.nick).then(data => {
+            this.listaEstudiantes.getUsuario(localStorage.getItem('nick')).then(data => {
                 console.log(data)
                 this.usuario = data;
                 this.products= (this.usuario.estudiante)

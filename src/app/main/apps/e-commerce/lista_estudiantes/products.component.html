@@ -35,7 +35,7 @@
 
             <!-- ADD BUTTON -->
             <button mat-raised-button
-                    [routerLink]="'/apps/e-commerce/products/new'"
+                    [routerLink]="'/apps/academico/estudiante/new'"
                     class="add-product-button fuse-white mt-24 mt-md-0">
                 <span>NUEVO ESTUDIANTE</span>
             </button>
@@ -67,9 +67,9 @@
                     <mat-cell *matCellDef="let product">
                         <img class="product-image"
                              *ngIf="product.nombreFoto" [alt]="product.nombreFoto"
-                             [src]="urlImagen + product.nombreFoto"/>
+                             [src]="urlImagen + product.nombreFoto" onerror="this.src='assets/images/logoUsuario.png'"/>
                         <img *ngIf="!product.nombreFoto"
-                             [src]="'assets/images/ecommerce/product-image-placeholder.png'">
+                             [src]="'assets/images/logoUsuario.png'">
                     </mat-cell>
                 </ng-container>
 
@@ -120,7 +120,7 @@
                 <mat-row *matRowDef="let product; columns: displayedColumns;"
                          class="product"
                          matRipple
-                         [routerLink]="'/apps/e-commerce/products/'+product.id+'/'+product.handle">
+                         [routerLink]="'/apps/academico/estudiante/'+product.id+'/'+product.nick">
                 </mat-row>
 
             </mat-table>

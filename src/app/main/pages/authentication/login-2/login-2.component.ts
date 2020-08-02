@@ -110,9 +110,16 @@ export class Login2Component implements OnInit {
         this._login.postLogin(login.nick, login.password).then((result) => {
             aux = result
             console.log(result)
-            environment.nick = login.nick
-            environment.profesor = aux;
-            environment.tokenUsuario = aux.jwt;
+            localStorage.setItem('nick', login.nick);
+           // environment.nick = login.nick
+            localStorage.setItem('profesor',JSON.stringify(aux));
+            localStorage.setItem('nombreUsuario',aux.nombre);
+            localStorage.setItem('apellidoUsuario',aux.apellido);
+            localStorage.setItem('correoUsuario',aux.email);
+            localStorage.setItem('imagenUsuario',aux.fotoUsuario);
+           // environment.profesor = aux;
+            localStorage.setItem('tokenUsuario', aux.jwt);
+           // environment.tokenUsuario = aux.jwt;
             this.getProfesor(login.nick)
         }, (err) => {
             this.registroIncorrecto()
@@ -121,9 +128,20 @@ export class Login2Component implements OnInit {
 
     sendLoginEstudiante() {
         const login = this.loginForm.value;
+        let aux: any
         this._login.postLoginEstudiante(login.nick, login.password).then((result) => {
-            environment.nick = login.nick;
-            environment.estudiante = result;
+            aux = result
+            localStorage.setItem('nick', login.nick);
+            // environment.nick = login.nick
+            localStorage.setItem('estudiante', aux);
+            localStorage.setItem('nombreUsuario',aux.nombre);
+            localStorage.setItem('apellidoUsuario',aux.apellido);
+            localStorage.setItem('correoUsuario',aux.email);
+            localStorage.setItem('imagenUsuario',aux.fotoUsuario);
+            // environment.profesor = aux;
+            localStorage.setItem('tokenUsuario', aux.jwt);
+            //environment.nick = login.nick;
+            //environment.estudiante = result;
             //environment.tokenUsuario = Object.values(result)[0];
             this.getEstudiante()
         }, (err) => {
@@ -132,7 +150,7 @@ export class Login2Component implements OnInit {
     }
 
     getSinRegistro() {
-        environment.rol = 'INVITADO'
+        localStorage.setItem('rol', 'INVITADO')
         const rutaHomeUsuario = [
             '/apps/home/welcome',
         ];
@@ -143,9 +161,17 @@ export class Login2Component implements OnInit {
         this._usuario.getUsuario(nick).then(data => {
             console.log(data)
             this.usuario = data;
-            environment.profesor = this.usuario;
-            environment.rol = 'PROFESOR'
-            environment.idProfesorRegistrado = this.usuario.id;
+
+            localStorage.setItem('nombreUsuario',this.usuario.nombre);
+            localStorage.setItem('apellidoUsuario',this.usuario.apellido);
+            localStorage.setItem('correoUsuario',this.usuario.email);
+            localStorage.setItem('imagenUsuario',this.usuario.nombreFoto);
+            // environment.profesor = aux;
+            localStorage.setItem('rol', 'PROFESOR');
+           // environment.profesor = this.usuario;
+           // environment.rol = 'PROFESOR'
+            localStorage.setItem('idProfesorRegistrado', this.usuario.id);
+           // environment.idProfesorRegistrado = this.usuario.id;
             this.registerNewNavigationAndToggle();
             const rutaHomeUsuario = [
                 '/apps/home/welcome',
@@ -155,10 +181,16 @@ export class Login2Component implements OnInit {
     }
 
     getEstudiante() {
-        this._usuario.getEstudiante().then(data => {
+        this._usuario.getEstudiante(localStorage.getItem('nick')).then(data => {
             this.usuario = data;
-            environment.estudiante = this.usuario;
-            environment.idEstudianteRegistrado = this.usuario.id;
+            localStorage.setItem('estudiante', JSON.stringify(this.usuario));
+            // environment.profesor = aux;
+            localStorage.setItem('rol', 'ESTUDIANTE');
+            // environment.profesor = this.usuario;
+            // environment.rol = 'PROFESOR'
+            localStorage.setItem('idEstudianteRegistrado', this.usuario.id);
+           // environment.estudiante = this.usuario;
+          //  environment.idEstudianteRegistrado = this.usuario.id;
             const rutaHomeUsuario = [
                 '/estudiante/wellcome',
             ];

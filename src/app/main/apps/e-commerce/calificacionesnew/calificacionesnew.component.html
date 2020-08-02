@@ -1,0 +1,227 @@
+<div id="product" class="page-layout carded fullwidth inner-scroll">
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+
+        <!-- HEADER -->
+        <div class="header accent" fxLayout="row" fxLayoutAlign="space-between center">
+
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="'/apps/academico/estudiante'">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div class="product-image mr-8 mr-sm-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                    <img *ngIf="usuario.nombreFoto" [src]="rutaImagen + usuario.nombreFoto"
+                         style="width: 150px; height: 150px">
+                    <img *ngIf="!usuario.nombreFoto" [src]="'assets/images/logoUsuario.png'"
+                         style="width: 150px; height: 150px">
+                </div>
+
+                <div fxLayout="column" fxLayoutAlign="start start"
+                     [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    <h1> {{usuario.nombre}} {{usuario.apellido}}</h1>
+
+                    <div class="subtitle secondary-text">
+                        <span>Calificaciones del Estudiante</span>
+                    </div>
+                </div>
+
+            </div>
+            <button mat-raised-button
+                    class="save-product-button"
+                    [disabled]="productForm.invalid"
+                    (click)="addProduct()">
+                <span>AÑADIR</span>
+            </button>
+            <!-- / APP TITLE -->
+
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+
+            <!-- CONTENT -->
+            <div class="content">
+
+                <form name="productForm" [formGroup]="productForm" class="product w-100-p" fxLayout="column" fxFlex>
+
+                    <mat-tab-group>
+
+                        <mat-tab label="Tipo de Calificación">
+
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Tipo de Calificación</mat-label>
+                                    <mat-select formControlName="tipo" required>
+                                        <mat-option [value]="'Mensual'" (click)="tipoAux = '2'">
+                                            Mensual
+                                        </mat-option>
+                                        <mat-option [value]="'Quimestral'" (click)="tipoAux = '1'">
+                                            Quimestral
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                            </div>
+
+                        </mat-tab>
+
+
+                        <mat-tab label="Registro de Calificación Mensual" *ngIf="tipoAux ==='2'">
+
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Mes</mat-label>
+                                    <mat-select formControlName="detalle" required>
+                                        <mat-option [value]="'Enero'">
+                                            Enero
+                                        </mat-option>
+                                        <mat-option [value]="'Febrero'">
+                                            Febrero
+                                        </mat-option>
+                                        <mat-option [value]="'Marzo'">
+                                            Marzo
+                                        </mat-option>
+                                        <mat-option [value]="'Abril'">
+                                            Abril
+                                        </mat-option>
+                                        <mat-option [value]="'Mayo'">
+                                            Mayo
+                                        </mat-option>
+                                        <mat-option [value]="'Junio'">
+                                            Junio
+                                        </mat-option>
+                                        <mat-option [value]="'Julio'">
+                                            Julio
+                                        </mat-option>
+                                        <mat-option [value]="'Agosto'">
+                                            Agosto
+                                        </mat-option>
+                                        <mat-option [value]="'Septiembre'">
+                                            Septiembre
+                                        </mat-option>
+                                        <mat-option [value]="'Octubre'">
+                                            Octubre
+                                        </mat-option>
+                                        <mat-option [value]="'Noviembre'">
+                                            Noviembre
+                                        </mat-option>
+                                        <mat-option [value]="'Diciembre'">
+                                            Diciembre
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Materia</mat-label>
+                                    <mat-select formControlName="materia" required>
+                                        <mat-option [value]="'Matemáticas'">
+                                            Matemáticas
+                                        </mat-option>
+                                        <mat-option [value]="'Lengua y Literatura'">
+                                            Lengua y Literatura
+                                        </mat-option>
+                                        <mat-option [value]="'Entorno Natural Y Social'">
+                                            Entorno Natural Y Social
+                                        </mat-option>
+                                        <mat-option [value]="'Educación Estética'">
+                                            Educación Estética
+                                        </mat-option>
+                                        <mat-option [value]="'Educación Física'">
+                                            Educación Física
+                                        </mat-option>
+                                        <mat-option [value]="'Proyectos Escolares'">
+                                            Proyectos Escolares
+                                        </mat-option>
+                                        <mat-option [value]="'Ciencias Naturales'">
+                                            Ciencias Naturales
+                                        </mat-option>
+                                        <mat-option [value]="'Estudios Sociales'">
+                                            Estudios Sociales
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
+                                    <mat-label>Calificación</mat-label>
+                                    <input matInput placeholder="calificacion"
+                                           name="calificacion" type="number"  step="0.01"
+                                           formControlName="calificacion">
+                                </mat-form-field>
+                            </div>
+                        </mat-tab>
+
+                        <mat-tab label="Registro de Calificación Quimestral" *ngIf="tipoAux ==='1'">
+
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Quimestre</mat-label>
+                                    <mat-select formControlName="detalle" required>
+                                        <mat-option [value]="'Primer Quimestre'">
+                                            Primer Quimestre
+                                        </mat-option>
+                                        <mat-option [value]="'Segundo Quimestre'">
+                                            Segundo Quimestre
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline" fxFlex="100">
+                                    <mat-label>Materia</mat-label>
+                                    <mat-select formControlName="materia" required>
+                                        <mat-option [value]="'Matemáticas'">
+                                            Matemáticas
+                                        </mat-option>
+                                        <mat-option [value]="'Lengua y Literatura'">
+                                            Lengua y Literatura
+                                        </mat-option>
+                                        <mat-option [value]="'Entorno Natural Y Social'">
+                                            Entorno Natural Y Social
+                                        </mat-option>
+                                        <mat-option [value]="'Educación Estética'">
+                                            Educación Estética
+                                        </mat-option>
+                                        <mat-option [value]="'Educación Física'">
+                                            Educación Física
+                                        </mat-option>
+                                        <mat-option [value]="'Proyectos Escolares'">
+                                            Proyectos Escolares
+                                        </mat-option>
+                                        <mat-option [value]="'Ciencias Naturales'">
+                                            Ciencias Naturales
+                                        </mat-option>
+                                        <mat-option [value]="'Estudios Sociales'">
+                                            Estudios Sociales
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
+                                    <mat-label>Calificación</mat-label>
+                                    <input matInput placeholder="calificacion"
+                                           name="calificacion" type="number"  step="0.01"
+                                           formControlName="calificacion">
+                                </mat-form-field>
+                            </div>
+                        </mat-tab>
+
+                    </mat-tab-group>
+
+                </form>
+
+            </div>
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CONTENT CARD -->
+
+    </div>
+    <!-- / CENTER -->
+
+</div>

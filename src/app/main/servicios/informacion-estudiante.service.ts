@@ -13,8 +13,8 @@ export class InformacionEstudianteService {
   getEstudianteConsulta() {
 
     return new Promise(resolve => {
-      this.http.get(this.apiUrl + '/estudiante/' + environment.nick,
-        {headers: new HttpHeaders({'Authorization': 'Bearer ' + environment.tokenUsuario})}).subscribe(data => {
+      this.http.get(this.apiUrl + '/estudiante/' + localStorage.getItem('nick'),
+        {headers: new HttpHeaders({'Authorization': 'Bearer ' + localStorage.getItem('tokenUsuario')})}).subscribe(data => {
         resolve(data);
 
       }, err => {
@@ -27,7 +27,7 @@ export class InformacionEstudianteService {
     const urlServicios = this.apiUrl + '/estudiante/upload-image';
     let formData: FormData = new FormData();
     formData.append('image', file);
-    return this.http.post<any>(urlServicios, formData, {headers: new HttpHeaders({'Authorization': 'Bearer ' + environment.tokenUsuario})})
+    return this.http.post<any>(urlServicios, formData, {headers: new HttpHeaders({'Authorization': 'Bearer ' + localStorage.getItem('tokenUsuario')})})
   }
 
   putEstudiante(
@@ -49,7 +49,7 @@ export class InformacionEstudianteService {
     };
 
     return new Promise((resolve, reject) => {
-      this.http.put(this.apiUrl + '/estudiante/'+ environment.nick, param, {headers: new HttpHeaders({'Authorization': 'Bearer ' + environment.tokenUsuario})})
+      this.http.put(this.apiUrl + '/estudiante/'+ localStorage.getItem('nick'), param, {headers: new HttpHeaders({'Authorization': 'Bearer ' +localStorage.getItem('tokenUsuario')})})
         .subscribe(res => {
           resolve(res);
         }, (err) => {
@@ -58,26 +58,10 @@ export class InformacionEstudianteService {
     });
   }
 
-  saveEstudiante(
-    nombre, apellido, email, nick, password, cedula, codigo_estudiante, fecha_nacimiento, grado, telefono, unidad_educativa, nombreFoto, rol) {
-    const param = {
-      nombre,
-      apellido,
-      email,
-      nick,
-      password,
-      cedula,
-      codigo_estudiante,
-      fecha_nacimiento,
-      grado,
-      telefono,
-      unidad_educativa,
-      nombreFoto,
-      rol
-    };
+  saveEstudiante(estudiante){
 
     return new Promise((resolve, reject) => {
-      this.http.post(this.apiUrl + '/estudiante', param, {headers: new HttpHeaders({'Authorization': 'Bearer ' + environment.tokenUsuario})})
+      this.http.post(this.apiUrl + '/estudiante', estudiante, {headers: new HttpHeaders({'Authorization': 'Bearer ' + localStorage.getItem('tokenUsuario')})})
         .subscribe(res => {
           resolve(res);
         }, (err) => {
@@ -95,7 +79,7 @@ export class InformacionEstudianteService {
     };
 
     return new Promise((resolve, reject) => {
-      this.http.post(this.apiUrl + '/profesorEstudiante', param, {headers: new HttpHeaders({'Authorization': 'Bearer ' + environment.tokenUsuario})})
+      this.http.post(this.apiUrl + '/profesorEstudiante', param, {headers: new HttpHeaders({'Authorization': 'Bearer ' + localStorage.getItem('tokenUsuario')})})
         .subscribe(res => {
           resolve(res);
         }, (err) => {

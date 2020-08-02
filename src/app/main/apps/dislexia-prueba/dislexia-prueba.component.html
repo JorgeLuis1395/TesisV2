@@ -1,0 +1,74 @@
+<div id="app-videos" class="page-layout simple">
+
+    <!-- HEADER -->
+    <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="center center">
+
+        <div class="hero-text">
+            <h1 [@animate]="{value:'*',params:{delay:'100ms', y:'25px'}}">
+                PRE DIAGNÓSTICO DE DISLEXIA</h1>
+        </div>
+
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <div class="content p-24">
+
+        <div fxLayout="column" fxLayoutAlign="center">
+
+
+            <div class="courses" fxLayout="row wrap" fxLayoutAlign="center" [@animateStagger]="{value:'80'}">
+
+                <div class="course" fxFlex="100" fxFlex.gt-xs="80"
+                     fxFlex.gt-sm="100" [@animate]="{value:'*',params:{y:'80%'}}">
+
+                    <div class="col-md-12">
+                        <div class="card-body">
+                            <h4><p align="justify" style="font-size: 18px">
+                                El pre diagnóstico del programa tiene una duración aproximadamente de 25 minutos, indica
+                                si el niño
+                                esta en riesgo de dislexia fonológica, dislexia profunda o dislexia superficial y
+                                visual, haciendo una
+                                recomendación de acudir con un especialista para que realice un diagnóstico formal y, si
+                                es necesario,
+                                el menor comience un tratamiento.
+                                <br>
+                                <br>
+                                <li>La edad recomendada de uso del pre diagnostico es de 7 a 12 años</li>
+                                <li>Para una correcta evaluación es necesario que exista la supervisión de un docente
+                                    tutor
+                                </li>
+                                <li>De igual manera es importante evitar distracciones hasta la finalización de la
+                                    evaluación
+                                </li>
+                                <br>
+                                <br>
+                                El Pre- Diagnóstico esta basado en la aplicación Deslixate para teléfonos móviles.
+                                Dentro del Pre-Diagnostico se evaluarán los siguientes tipos de Dislexia:
+                                <br>
+                                <br>
+                                <li><a>Dislexia Fonológica</a></li>
+                                <li><a>Dislexia Visual</a></li>
+                            </h4>
+                            <div class="row">
+                                <div class="col-sm-12" align="center">
+
+                                    <button mat-button color="warn" style="background-color: #1c5fc4; color: white"
+                                            routerLink='/login'>
+                                        Test Completo
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- / CONTENT -->
+
+</div>
+

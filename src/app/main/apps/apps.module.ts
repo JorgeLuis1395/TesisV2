@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FuseSharedModule } from '@fuse/shared.module';
 import {MatIconModule} from "@angular/material/icon";
 import {MatCardModule} from "@angular/material/card";
+import { DislexiaTestComponent } from './dislexia-prueba/dislexia-test/dislexia-test.component';
 
 const routes = [
     {
@@ -23,7 +24,7 @@ const routes = [
         loadChildren: () => import('./calendar/calendar.module').then(m => m.CalendarModule)
     },
     {
-        path        : 'e-commerce',
+        path        : 'academico',
         loadChildren: () => import('./e-commerce/e-commerce.module').then(m => m.EcommerceModule)
     },
     {
@@ -61,6 +62,10 @@ const routes = [
     {
         path        : 'imagenes',
         loadChildren: () => import('./imagenes/imagenes.module').then(m => m.ImagenesModule)
+    },
+    {
+        path        : 'prediagnostico',
+        loadChildren: () => import('./dislexia-prueba/prediagnostico.module').then(m => m.PrediagnosticoModule)
     },
     {
         path        : 'home',

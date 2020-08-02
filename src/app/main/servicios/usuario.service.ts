@@ -21,7 +21,7 @@ export class UsuarioService {
     getUsuario(nick) {
         return new Promise(resolve => {
             this.http.get(this.apiUrl + '/usuario/' + nick,
-                {headers: new HttpHeaders({'Authorization': 'Bearer ' + environment.tokenUsuario})}).subscribe(data => {
+                {headers: new HttpHeaders({'Authorization': 'Bearer ' + localStorage.getItem('tokenUsuario')})}).subscribe(data => {
                 resolve(data);
                 environment.idProfesor = Object.values(data)[0];
 
@@ -35,7 +35,7 @@ export class UsuarioService {
     getCuentosId(idCuento) {
         return new Promise(resolve => {
             this.http.get(this.apiUrl + '/cuentos/'+ idCuento,
-                {headers: new HttpHeaders({'Authorization': 'Bearer ' + environment.tokenUsuario})}).subscribe(data => {
+                {headers: new HttpHeaders({'Authorization': 'Bearer ' + localStorage.getItem('tokenUsuario')})}).subscribe(data => {
                 resolve(data);
 
             }, err => {
@@ -47,7 +47,7 @@ export class UsuarioService {
     getCuentos() {
         return new Promise(resolve => {
             this.http.get(this.apiUrl + '/cuentos',
-                {headers: new HttpHeaders({'Authorization': 'Bearer ' + environment.tokenUsuario})}).subscribe(data => {
+                {headers: new HttpHeaders({'Authorization': 'Bearer ' + localStorage.getItem('tokenUsuario')})}).subscribe(data => {
                 resolve(data);
             }, err => {
                 console.log(err);
@@ -57,10 +57,10 @@ export class UsuarioService {
 
 
 
-    getEstudiante() {
+    getEstudiante(nickUsuario) {
         return new Promise(resolve => {
-            this.http.get(this.apiUrl + '/estudiante/' + environment.nick,
-                {headers: new HttpHeaders({'Authorization': 'Bearer ' + environment.tokenUsuario})}).subscribe(data => {
+            this.http.get(this.apiUrl + '/estudiante/' + nickUsuario,
+                {headers: new HttpHeaders({'Authorization': 'Bearer ' + localStorage.getItem('tokenUsuario')})}).subscribe(data => {
                 resolve(data);
             }, err => {
                 console.log(err);
@@ -79,7 +79,7 @@ export class UsuarioService {
         };
 
         return new Promise((resolve, reject) => {
-            this.http.post(this.apiUrl + '/estudianteCalificacion', param, {headers: new HttpHeaders({'Authorization': 'Bearer ' + environment.tokenUsuario})})
+            this.http.post(this.apiUrl + '/estudianteCalificacion', param, {headers: new HttpHeaders({'Authorization': 'Bearer ' + localStorage.getItem('tokenUsuario')})})
                 .subscribe(res => {
                     resolve(res);
                 }, (err) => {
@@ -88,11 +88,11 @@ export class UsuarioService {
         });
     }
 
-    getEstudianteId() {
+    getEstudianteId(idEstudiante) {
 
         return new Promise(resolve => {
-            this.http.get(this.apiUrl + '/estudiante/id/' + environment.idEstudiante,
-                {headers: new HttpHeaders({'Authorization': 'Bearer ' + environment.tokenUsuario})}).subscribe(data => {
+            this.http.get(this.apiUrl + '/estudiante/id/' + idEstudiante,
+                {headers: new HttpHeaders({'Authorization': 'Bearer ' + localStorage.getItem('tokenUsuario')})}).subscribe(data => {
                 resolve(data);
 
             }, err => {
@@ -106,7 +106,7 @@ export class UsuarioService {
         this.idpuntajeFonologico = environment.idPuntaje - 1;
         return new Promise(resolve => {
             this.http.get(this.apiUrl + '/puntaje/' + this.idpuntajeFonologico,
-                {headers: new HttpHeaders({'Authorization': 'Bearer ' + environment.tokenUsuario})}).subscribe(data => {
+                {headers: new HttpHeaders({'Authorization': 'Bearer ' + localStorage.getItem('tokenUsuario')})}).subscribe(data => {
                 resolve(data);
                 console.log(data);
             }, err => {
@@ -119,7 +119,7 @@ export class UsuarioService {
 
         return new Promise(resolve => {
             this.http.get(this.apiUrl + '/puntaje/' + environment.idPuntaje,
-                {headers: new HttpHeaders({'Authorization': 'Bearer ' + environment.tokenUsuario})}).subscribe(data => {
+                {headers: new HttpHeaders({'Authorization': 'Bearer ' + localStorage.getItem('tokenUsuario')})}).subscribe(data => {
                 resolve(data);
 
             }, err => {
@@ -137,7 +137,7 @@ export class UsuarioService {
         };
 
         return new Promise((resolve, reject) => {
-            this.http.post(this.apiUrl + '/estudiantePuntaje', param, {headers: new HttpHeaders({'Authorization': 'Bearer ' + environment.tokenUsuario})})
+            this.http.post(this.apiUrl + '/estudiantePuntaje', param, {headers: new HttpHeaders({'Authorization': 'Bearer ' + localStorage.getItem('tokenUsuario')})})
                 .subscribe(res => {
                     resolve(res);
                 }, (err) => {
@@ -145,16 +145,10 @@ export class UsuarioService {
                 });
         });
     }
-    postCalificaciones(tipo, detalle, materia, calificacion) {
-        const param = {
-            tipo,
-            detalle,
-            materia,
-            calificacion
-        };
+    postCalificaciones(calificacion) {
 
         return new Promise((resolve, reject) => {
-            this.http.post(this.apiUrl + '/calificaciones', param, {headers: new HttpHeaders({'Authorization': 'Bearer ' + environment.tokenUsuario})})
+            this.http.post(this.apiUrl + '/calificaciones',  calificacion, {headers: new HttpHeaders({'Authorization': 'Bearer ' + localStorage.getItem('tokenUsuario')})})
                 .subscribe(res => {
                     resolve(res);
                 }, (err) => {
@@ -170,7 +164,7 @@ export class UsuarioService {
         };
 
         return new Promise((resolve, reject) => {
-            this.http.post(this.apiUrl + '/puntaje', param, {headers: new HttpHeaders({'Authorization': 'Bearer ' + environment.tokenUsuario})})
+            this.http.post(this.apiUrl + '/puntaje', param, {headers: new HttpHeaders({'Authorization': 'Bearer ' + localStorage.getItem('tokenUsuario')})})
                 .subscribe(res => {
                     resolve(res);
                 }, (err) => {
@@ -187,7 +181,7 @@ export class UsuarioService {
         };
 
         return new Promise((resolve, reject) => {
-            this.http.post(this.apiUrl + '/agenda', param, {headers: new HttpHeaders({'Authorization': 'Bearer ' + environment.tokenUsuario})})
+            this.http.post(this.apiUrl + '/agenda', param, {headers: new HttpHeaders({'Authorization': 'Bearer ' + localStorage.getItem('tokenUsuario')})})
                 .subscribe(res => {
                     resolve(res);
                 }, (err) => {
@@ -205,7 +199,7 @@ export class UsuarioService {
         };
 
         return new Promise((resolve, reject) => {
-            this.http.post(this.apiUrl + '/agendaProfesor', param, {headers: new HttpHeaders({'Authorization': 'Bearer ' + environment.tokenUsuario})})
+            this.http.post(this.apiUrl + '/agendaProfesor', param, {headers: new HttpHeaders({'Authorization': 'Bearer ' + localStorage.getItem('tokenUsuario')})})
                 .subscribe(res => {
                     resolve(res);
                 }, (err) => {
@@ -219,7 +213,8 @@ export class UsuarioService {
         const urlServicios = this.apiUrl + '/usuario/upload-image';
         let formData: FormData = new FormData();
         formData.append('image', file);
-        return this.http.post<any>(urlServicios, formData, {headers: new HttpHeaders({'Authorization': 'Bearer ' + environment.tokenUsuario})})
+        return this.http.post<any>(urlServicios, formData, {headers: new HttpHeaders({'Authorization': 'Bearer ' + localStorage.getItem('tokenUsuario')})})
     }
+
 
 }

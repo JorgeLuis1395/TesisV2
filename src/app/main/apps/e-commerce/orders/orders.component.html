@@ -10,26 +10,36 @@
         <!-- HEADER -->
         <div class="header accent"
              fxLayout="column" fxLayoutAlign="center center"
-             fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-between center">
+             fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="space-between center">
 
             <!-- APP TITLE -->
-            <div class="logo mb-24 mb-sm-0"
+            <div class="logo mb-24 mb-md-0"
                  fxLayout="row" fxLayoutAlign="start center">
                 <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
-                    shopping_basket
+                    person_outline
                 </mat-icon>
-                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">Orders</span>
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    ESTUDIANTES
+                </span>
             </div>
             <!-- / APP TITLE -->
 
             <!-- SEARCH -->
-            <div class="search-wrapper  ml-sm-32">
+            <div class="search-wrapper mx-32 mx-md-0">
                 <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
                     <mat-icon>search</mat-icon>
-                    <input #filter placeholder="Search for an order">
+                    <input #filter placeholder="BUSCAR">
                 </div>
             </div>
             <!-- / SEARCH -->
+
+            <!-- ADD BUTTON -->
+            <button mat-raised-button
+                    [routerLink]="'/apps/academico/estudiante/new'"
+                    class="add-product-button fuse-white mt-24 mt-md-0">
+                <span>NUEVO ESTUDIANTE</span>
+            </button>
+            <!-- / ADD BUTTON -->
 
         </div>
         <!-- / HEADER -->
@@ -37,7 +47,7 @@
         <!-- CONTENT CARD -->
         <div class="content-card">
 
-            <mat-table class="orders-table"
+            <mat-table class="products-table"
                        #table [dataSource]="dataSource"
                        matSort
                        [@animateStagger]="{value:'50'}"
@@ -46,77 +56,73 @@
                 <!-- ID Column -->
                 <ng-container matColumnDef="id">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
-                    <mat-cell *matCellDef="let order">
-                        <p class="text-truncate">{{order.id}}</p>
+                    <mat-cell *matCellDef="let product">
+                        <p class="text-truncate">{{product.id}}</p>
                     </mat-cell>
                 </ng-container>
 
-                <!-- Reference Column -->
-                <ng-container matColumnDef="reference">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Reference</mat-header-cell>
-                    <mat-cell *matCellDef="let order" fxHide fxShow.gt-sm>
-                        <p class="text-truncate">{{order.reference}}</p>
+                <!-- Image Column -->
+                <ng-container matColumnDef="image">
+                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                    <mat-cell *matCellDef="let product">
+                        <img class="product-image"
+                             *ngIf="product.nombreFoto" [alt]="product.nombreFoto"
+                             [src]="urlImagen + product.nombreFoto" onerror="this.src='assets/images/logoUsuario.png'"/>
+                        <img *ngIf="!product.nombreFoto"
+                             [src]="'assets/images/logoUsuario.png'">
                     </mat-cell>
                 </ng-container>
 
                 <!-- Name Column -->
-                <ng-container matColumnDef="customer">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Customer</mat-header-cell>
-                    <mat-cell *matCellDef="let order">
-                        <p class="text-truncate">
-                            {{order.customer.firstName}}
-                            {{order.customer.lastName}}
+                <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Apellido</mat-header-cell>
+                    <mat-cell *matCellDef="let product">
+                        <p class="text-truncate">{{product.apellido}}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Category Column -->
+                <ng-container matColumnDef="category">
+                    <mat-header-cell *matHeaderCellDef  mat-sort-header>Nombre</mat-header-cell>
+                    <mat-cell *matCellDef="let product" >
+                        <p class="category text-truncate">
+                            {{product.nombre}}
                         </p>
                     </mat-cell>
                 </ng-container>
 
-                <!-- Total Price Column -->
-                <ng-container matColumnDef="total">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>Total</mat-header-cell>
-                    <mat-cell *matCellDef="let order" fxHide fxShow.gt-md>
-                        <p class="total-price text-truncate">
-                            {{order.total | currency:'USD':'symbol'}}
-                        </p>
+                <!-- Quantity Column -->
+                <ng-container matColumnDef="quantity">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Cedula</mat-header-cell>
+                    <mat-cell *matCellDef="let product" fxHide fxShow.gt-sm>
+
+                        <span>
+                            {{product.cedula}}
+                        </span>
+
                     </mat-cell>
                 </ng-container>
 
-                <!-- Payment Column -->
-                <ng-container matColumnDef="payment">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Payment</mat-header-cell>
-                    <mat-cell *matCellDef="let order" fxHide fxShow.gt-sm>
-                        <p class="text-truncate">
-                            {{order.payment.method}}
-                        </p>
+                <ng-container matColumnDef="fecha">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Fecha Nacimiento</mat-header-cell>
+                    <mat-cell *matCellDef="let product" fxHide fxShow.gt-sm>
+
+                        <span>
+                            {{product.fecha_nacimiento| date}}
+                        </span>
+
                     </mat-cell>
                 </ng-container>
 
-                <!-- Status Column -->
-                <ng-container matColumnDef="status">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
-                    <mat-cell *matCellDef="let order">
-                        <p class="status text-truncate h6 p-4" [ngClass]="order.status[0].color">
-                            {{order.status[0].name}}
-                        </p>
-                    </mat-cell>
-                </ng-container>
-
-                <!-- Date Column -->
-                <ng-container matColumnDef="date">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Date</mat-header-cell>
-                    <mat-cell *matCellDef="let order" fxHide fxShow.gt-sm>
-                        <p class="text-truncate">
-                            {{order.date}}
-                        </p>
-                    </mat-cell>
-                </ng-container>
 
                 <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
 
-                <mat-row *matRowDef="let order; columns: displayedColumns;"
-                         class="order"
+                <mat-row *matRowDef="let product; columns: displayedColumns;"
+                         class="product"
                          matRipple
-                         [routerLink]="'/apps/e-commerce/orders/'+order.id">
+                         [routerLink]="'/apps/academico/estudiante/calificaciones/'+product.id+'/'+product.nick">
                 </mat-row>
+
             </mat-table>
 
             <mat-paginator #paginator
