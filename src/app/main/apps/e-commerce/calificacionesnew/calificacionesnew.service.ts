@@ -106,26 +106,41 @@ export class CalificacionesnewService implements Resolve<any> {
      */
     addProduct(product): Promise<any> {
         return new Promise((resolve, reject) => {
-        this.saveCalificacion(product)
+            this.saveCalificacion(product)
         });
     }
-    saveCalificacion(product){
 
+    saveCalificacion(product) {
+
+        this._httpClient.post(environment.url + '/calificaciones', {
+            tipo: product.tipo,
+            detalle: product.detalle,
+            materia: product.materia,
+            calificacion: product.calificacion
+        }, {headers: new HttpHeaders({'Authorization': 'Bearer ' + localStorage.getItem('tokenUsuario')})}).subscribe(data=>{
+            this.aux = Object.values(data)[1][0];
+            this.idCalificacion = parseInt(Object.values(this.aux)[0].toString());
+            this.estudianteCalificacion();
+            this.getEstudiante()
+        })
+/*
         this.usuario.postCalificaciones({
             tipo: product.tipo,
-            detalle:product.detalle,
-            materia:product.materia,
-            calificacion:product.calificacion}).then((result) => {
+            detalle: product.detalle,
+            materia: product.materia,
+            calificacion: product.calificacion
+        }).then((result) => {
             this.aux = Object.values(result)[1][0];
             this.idCalificacion = parseInt(Object.values(this.aux)[0].toString());
             this.estudianteCalificacion();
             this.getEstudiante()
         }, (err) => {
             console.log(err);
-        });
+        });*/
     }
+
     getEstudiante() {
-        this.usuario.getEstudianteId(this.routeParams.id).then(data => {
+        this.listaEstudiantes.getEstudianteId(this.routeParams.id).then(data => {
             this.estudiantes = data;
             console.log(this.estudiantes)
             this.auxCalificaciones = Object.values(data)[14]
@@ -134,17 +149,16 @@ export class CalificacionesnewService implements Resolve<any> {
 
     estudianteCalificacion() {
 
-        this.usuario.saveCalificacionEstudiante( parseInt(this.routeParams.id),
+        this.listaEstudiantes.saveCalificacionEstudiante(parseInt(this.routeParams.id),
             this.idCalificacion,
         ).then((result) => {
             result
 
-           this.registrocorrecto();
+            this.registrocorrecto();
         }, (err) => {
-           this.registroIncorrecto();
+            this.registroIncorrecto();
         });
     }
-
 
 
     registrocorrecto() {

@@ -12,6 +12,7 @@ import Swal from "sweetalert2";
 import {ActivatedRoute} from "@angular/router";
 import {CalificacionesService} from "../calificaciones/calificaciones.service";
 import {CalificacionesnewService} from "./calificacionesnew.service";
+import {Calificacion} from "./calificacionesnew.model";
 
 @Component({
     selector: 'app-calificacionesnew',
@@ -20,7 +21,7 @@ import {CalificacionesnewService} from "./calificacionesnew.service";
 })
 export class CalificacionesnewComponent implements OnInit {
 
-    product: Product;
+    product: Calificacion;
     usuario: any;
     idEstudiante: any;
     pageType: string;
@@ -60,7 +61,7 @@ export class CalificacionesnewComponent implements OnInit {
         private listaEstudiantes: UsuarioService,
     ) {
         // Set the default
-        this.product = new Product();
+        this.product = new Calificacion();
 
         // Set the private defaults
         this._unsubscribeAll = new Subject();
@@ -80,11 +81,11 @@ export class CalificacionesnewComponent implements OnInit {
             .subscribe(product => {
 
                 if (product) {
-                    this.product = new Product(product);
+                    this.product = new Calificacion(product);
                     this.pageType = 'edit';
                 } else {
                     this.pageType = 'new';
-                    this.product = new Product();
+                    this.product = new Calificacion();
                 }
 
                 this.productForm = this.createProductForm();
