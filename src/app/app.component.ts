@@ -130,6 +130,7 @@ export class AppComponent implements OnInit, OnDestroy {
                 console.log(this.fuseConfig, this._fuseConfigService)
 
                 if (localStorage.getItem('rol') === 'PROFESOR') {
+                    this.registerNewNavigationAndToggleAdmin()
                     this.fuseConfig.colorTheme = 'theme-yellow-light';
                     this.fuseConfig.layout.style = 'horizontal-layout-1';
                     this.fuseConfig.layout.navbar.primaryBackground = 'fuse-navy-50';
@@ -137,7 +138,17 @@ export class AppComponent implements OnInit, OnDestroy {
                     this.fuseConfig.layout.toolbar.hidden = false;
                 }
                 if (localStorage.getItem('rol') === 'INVITADO') {
+                    this.registerNewNavigationAndToggleInvitado()
                     this.fuseConfig.colorTheme = 'theme-blue-gray-dark';
+                    this.fuseConfig.layout.style = 'horizontal-layout-1';
+                    this.fuseConfig.layout.navbar.primaryBackground = 'fuse-navy-50';
+                    this.fuseConfig.layout.toolbar.position = 'above';
+                    this.fuseConfig.layout.toolbar.hidden = false;
+                }
+
+                if (localStorage.getItem('rol') === 'ESTUDIANTE') {
+                    this.registerNewNavigationAndToggleEstudiante()
+                    this.fuseConfig.colorTheme = 'theme-pink-dark';
                     this.fuseConfig.layout.style = 'horizontal-layout-1';
                     this.fuseConfig.layout.navbar.primaryBackground = 'fuse-navy-50';
                     this.fuseConfig.layout.toolbar.position = 'above';
@@ -184,5 +195,323 @@ export class AppComponent implements OnInit, OnDestroy {
      */
     toggleSidebarOpen(key): void {
         this._fuseSidebarService.getSidebar(key).toggleOpen();
+    }
+
+    registerNewNavigationAndToggleAdmin(): void {
+        const adminNav = [
+            {
+                id: 'admin',
+                title: 'DISLEXIA',
+                type: 'group',
+                icon: 'apps',
+                children: [
+                    {
+                        id: 'dislexia1',
+                        title: 'Que es la Dislexia',
+                        type: 'item',
+                        icon: 'filter_1',
+                        url: '/ui/page-layouts/dislexia1',
+                    },
+                    {
+                        id: 'dislexia2',
+                        title: 'PRODISLEX',
+                        type: 'item',
+                        icon: 'filter_2',
+                        url: '/ui/page-layouts/dislexia2'
+                    },
+                    {
+                        id: 'dislexia3',
+                        title: 'Adaptaciones generales para alumnos',
+                        type: 'item',
+                        icon: 'filter_3',
+                        url: '/ui/page-layouts/dislexia4'
+                    },
+                    {
+                        id: 'dislexia4',
+                        title: 'Adaptaciones generales para exámenes',
+                        type: 'item',
+                        icon: 'filter_4',
+                        url: '/ui/page-layouts/dislexia3'
+                    },
+                    {
+                        id: 'dislexia5',
+                        title: '7 Pasos para detectar la Dislexia',
+                        type: 'item',
+                        icon: 'filter_5',
+                        url: '/ui/page-layouts/dislexia5'
+                    }
+                ]
+            },
+            {
+                id: 'control-panel',
+                title: 'ESTUDIANTES',
+                type: 'group',
+                icon: 'supervised_user_circle',
+                children: [
+                    {
+                        id: 'cron-jobs',
+                        title: 'Calificaciones',
+                        type: 'item',
+                        icon: 'spellcheck',
+                        url: '/apps/academico/orders'
+                    },
+                    {
+                        id: 'maintenance-mode',
+                        title: 'Lista',
+                        type: 'item',
+                        icon: 'format_list_numbered',
+                        url: '/apps/academico/estudiante'
+                    },
+                    {
+                        id: 'cron-jobs',
+                        title: 'Resultados Dislexia',
+                        type: 'item',
+                        icon: 'spellcheck',
+                        url: '/apps/academico/puntaje'
+                    },
+                ]
+            },
+            {
+                id: 'agenda',
+                title: 'AGENDA',
+                type: 'group',
+                icon: 'calendar_today',
+                url: '/apps/calendar'
+            },
+        ];
+
+        // Register the new navigation
+        this._fuseNavigationService.register('admin-nav', adminNav);
+
+        // Set the current navigation
+        this._fuseNavigationService.setCurrentNavigation('admin-nav');
+    }
+
+
+    registerNewNavigationAndToggleInvitado(): void {
+        const adminNav = [
+            {
+                id: 'admin',
+                title: 'DISLEXIA',
+                type: 'group',
+                icon: 'apps',
+                children: [
+                    {
+                        id: 'dislexia1',
+                        title: 'Que es la Dislexia',
+                        type: 'item',
+                        icon: 'filter_1',
+                        url: '/ui/page-layouts/dislexia1',
+                    },
+                    {
+                        id: 'dislexia2',
+                        title: 'PRODISLEX',
+                        type: 'item',
+                        icon: 'filter_2',
+                        url: '/ui/page-layouts/dislexia2'
+                    },
+                    {
+                        id: 'dislexia3',
+                        title: 'Adaptaciones generales para alumnos',
+                        type: 'item',
+                        icon: 'filter_3',
+                        url: '/ui/page-layouts/dislexia4'
+                    },
+                    {
+                        id: 'dislexia4',
+                        title: 'Adaptaciones generales para exámenes',
+                        type: 'item',
+                        icon: 'filter_4',
+                        url: '/ui/page-layouts/dislexia3'
+                    },
+                    {
+                        id: 'dislexia5',
+                        title: '7 Pasos para detectar la Dislexia',
+                        type: 'item',
+                        icon: 'filter_5',
+                        url: '/ui/page-layouts/dislexia5'
+                    }
+                ]
+            },
+            {
+                id: 'control-panel',
+                title: 'ESTUDIANTES',
+                type: 'group',
+                icon: 'supervised_user_circle',
+                children: [
+                    {
+                        id: 'cron-jobs',
+                        title: 'Calificaciones',
+                        type: 'item',
+                        icon: 'spellcheck',
+                        url: '/apps/file-manager'
+                    },
+                    {
+                        id: 'maintenance-mode',
+                        title: 'Lista',
+                        type: 'item',
+                        icon: 'format_list_numbered',
+                        url: '/apps/e-commerce/products'
+                    }
+                ]
+            },
+            {
+                id: 'agenda',
+                title: 'AGENDA',
+                type: 'group',
+                icon: 'calendar_today',
+                url: '/apps/todo'
+            },
+
+            {
+                id: 'perfil',
+                title: 'PERFIL',
+                type: 'group',
+                icon: 'apps',
+                children: [
+                    {
+                        id: 'cron-jobs',
+                        title: 'Cron Jobs',
+                        type: 'item',
+                        icon: 'settings',
+                        url: '/apps/file-manager'
+                    },
+                    {
+                        id: 'maintenance-mode',
+                        title: 'Maintenance Mode',
+                        type: 'item',
+                        icon: 'build',
+                        url: '/apps/todo'
+                    }
+                ]
+            }
+        ];
+
+        // Register the new navigation
+        this._fuseNavigationService.register('admin-nav', adminNav);
+
+        // Set the current navigation
+        this._fuseNavigationService.setCurrentNavigation('admin-nav');
+    }
+
+
+    registerNewNavigationAndToggleEstudiante(): void {
+        const adminNav = [
+            {
+                id: 'admin',
+                title: 'DISLEXIA',
+                type: 'group',
+                icon: 'apps',
+                children: [
+                    {
+                        id: 'dislexia1',
+                        title: 'Que es la Dislexia',
+                        type: 'item',
+                        icon: 'filter_1',
+                        url: '/ui/page-layouts/dislexia1',
+                    },
+                    {
+                        id: 'dislexia2',
+                        title: 'PRODISLEX',
+                        type: 'item',
+                        icon: 'filter_2',
+                        url: '/ui/page-layouts/dislexia2'
+                    },
+                    {
+                        id: 'dislexia3',
+                        title: 'Adaptaciones generales para alumnos',
+                        type: 'item',
+                        icon: 'filter_3',
+                        url: '/ui/page-layouts/dislexia4'
+                    },
+                    {
+                        id: 'dislexia4',
+                        title: 'Adaptaciones generales para exámenes',
+                        type: 'item',
+                        icon: 'filter_4',
+                        url: '/ui/page-layouts/dislexia3'
+                    },
+                    {
+                        id: 'dislexia5',
+                        title: '7 Pasos para detectar la Dislexia',
+                        type: 'item',
+                        icon: 'filter_5',
+                        url: '/ui/page-layouts/dislexia5'
+                    }
+                ]
+            },
+            {
+                id: 'control-panel',
+                title: 'TRATAMIENTO',
+                type: 'group',
+                icon: 'supervised_user_circle',
+                children: [
+                    {
+                        id: 'cron-jobs',
+                        title: 'Cuentos',
+                        type: 'item',
+                        icon: 'spellcheck',
+                        url: '/apps/academy'
+                    },
+                    {
+                        id: 'juegos',
+                        title: 'Juegos',
+                        type: 'group',
+                        icon: 'apps',
+                        children: [
+                            {
+                                id: 'cron-jobs',
+                                title: 'Ahorcado',
+                                type: 'item',
+                                icon: 'settings',
+                                url: '/apps/ahorcado'
+                            },
+                            {
+                                id: 'maintenance-mode',
+                                title: 'Memoria',
+                                type: 'item',
+                                icon: 'build',
+                                url: '/apps/memoria'
+                            }
+                        ]
+                    },
+                    {
+                        id: 'maintenance-mode',
+                        title: 'Videos',
+                        type: 'item',
+                        icon: 'format_list_numbered',
+                        url: '/apps/videos/videos'
+                    },
+                    {
+                        id: 'maintenance-mode',
+                        title: 'Imagenes',
+                        type: 'item',
+                        icon: 'format_list_numbered',
+                        url: '/apps/cuentos'
+                    }
+                ]
+            },
+            {
+                id: 'agenda',
+                title: 'PRE DIAGNÓSTICO',
+                type: 'group',
+                icon: 'calendar_today',
+                url: '/apps/prediagnostico'
+            },
+
+            {
+                id: 'perfil',
+                title: 'CALIFICACIONES',
+                type: 'group',
+                icon: 'apps',
+                url: '/apps/academico/calificacion'
+            }
+        ];
+
+        // Register the new navigation
+        this._fuseNavigationService.register('admin-nav', adminNav);
+
+        // Set the current navigation
+        this._fuseNavigationService.setCurrentNavigation('admin-nav');
     }
 }

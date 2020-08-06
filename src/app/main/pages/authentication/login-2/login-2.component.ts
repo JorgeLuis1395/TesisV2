@@ -172,7 +172,7 @@ export class Login2Component implements OnInit {
            // environment.rol = 'PROFESOR'
             localStorage.setItem('idProfesorRegistrado', this.usuario.id);
            // environment.idProfesorRegistrado = this.usuario.id;
-            this.registerNewNavigationAndToggle();
+            //this.registerNewNavigationAndToggle();
             const rutaHomeUsuario = [
                 '/apps/home/welcome',
             ];
@@ -188,11 +188,15 @@ export class Login2Component implements OnInit {
             localStorage.setItem('rol', 'ESTUDIANTE');
             // environment.profesor = this.usuario;
             // environment.rol = 'PROFESOR'
+            localStorage.setItem('nombreUsuario',this.usuario.nombre);
+            localStorage.setItem('apellidoUsuario',this.usuario.apellido);
+            localStorage.setItem('correoUsuario',this.usuario.email);
+
             localStorage.setItem('idEstudianteRegistrado', this.usuario.id);
            // environment.estudiante = this.usuario;
           //  environment.idEstudianteRegistrado = this.usuario.id;
             const rutaHomeUsuario = [
-                '/estudiante/wellcome',
+                '/apps/home/welcome',
             ];
             this._router.navigate(rutaHomeUsuario);
         });
@@ -237,112 +241,6 @@ export class Login2Component implements OnInit {
             icon: 'error',
             confirmButtonText: 'Aceptar'
         })
-    }
-
-    registerNewNavigationAndToggle(): void {
-        const adminNav = [
-            {
-                id: 'admin',
-                title: 'DISLEXIA',
-                type: 'group',
-                icon: 'apps',
-                children: [
-                    {
-                        id: 'dislexia1',
-                        title: 'Que es la Dislexia',
-                        type: 'item',
-                        icon: 'filter_1',
-                        url: '/ui/page-layouts/dislexia1',
-                    },
-                    {
-                        id: 'dislexia2',
-                        title: 'PRODISLEX',
-                        type: 'item',
-                        icon: 'filter_2',
-                        url: '/ui/page-layouts/dislexia2'
-                    },
-                    {
-                        id: 'dislexia3',
-                        title: 'Adaptaciones generales para alumnos',
-                        type: 'item',
-                        icon: 'filter_3',
-                        url: '/ui/page-layouts/dislexia4'
-                    },
-                    {
-                        id: 'dislexia4',
-                        title: 'Adaptaciones generales para exámenes',
-                        type: 'item',
-                        icon: 'filter_4',
-                        url: '/ui/page-layouts/dislexia3'
-                    },
-                    {
-                        id: 'dislexia5',
-                        title: '7 Pasos para detectar la Dislexia',
-                        type: 'item',
-                        icon: 'filter_5',
-                        url: '/ui/page-layouts/dislexia5'
-                    }
-                ]
-            },
-            {
-                id: 'control-panel',
-                title: 'ESTUDIANTES',
-                type: 'group',
-                icon: 'supervised_user_circle',
-                children: [
-                    {
-                        id: 'cron-jobs',
-                        title: 'Calificaciones',
-                        type: 'item',
-                        icon: 'spellcheck',
-                        url: '/apps/file-manager'
-                    },
-                    {
-                        id: 'maintenance-mode',
-                        title: 'Lista',
-                        type: 'item',
-                        icon: 'format_list_numbered',
-                        url: '/apps/e-commerce/products'
-                    }
-                ]
-            },
-            {
-                id: 'agenda',
-                title: 'AGENDA',
-                type: 'group',
-                icon: 'calendar_today',
-                url: '/apps/todo'
-            },
-
-            {
-                id: 'perfil',
-                title: 'PERFIL',
-                type: 'group',
-                icon: 'apps',
-                children: [
-                    {
-                        id: 'cron-jobs',
-                        title: 'Cron Jobs',
-                        type: 'item',
-                        icon: 'settings',
-                        url: '/apps/file-manager'
-                    },
-                    {
-                        id: 'maintenance-mode',
-                        title: 'Maintenance Mode',
-                        type: 'item',
-                        icon: 'build',
-                        url: '/apps/todo'
-                    }
-                ]
-            }
-        ];
-
-        // Register the new navigation
-        this._fuseNavigationService.register('admin-nav', adminNav);
-
-        // Set the current navigation
-        this._fuseNavigationService.setCurrentNavigation('admin-nav');
     }
 
 

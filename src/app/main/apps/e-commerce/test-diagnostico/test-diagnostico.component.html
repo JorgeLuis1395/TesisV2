@@ -13,7 +13,7 @@
             <!-- APP TITLE -->
             <div fxLayout="row" fxLayoutAlign="start center">
 
-                <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="'/apps/academico/estudiante'">
+                <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="'/apps/academico/puntaje'">
                     <mat-icon>arrow_back</mat-icon>
                 </button>
 
@@ -29,16 +29,16 @@
                     <h1> {{usuario.nombre}} {{usuario.apellido}}</h1>
 
                     <div class="subtitle secondary-text">
-                        <span>Calificaciones del Estudiante</span>
+                        <span>Puntuaciones del Estudiante</span>
                     </div>
                 </div>
 
             </div>
             <!-- ADD BUTTON -->
             <button mat-raised-button
-                    [routerLink]="'/apps/academico/estudiante/calificaciones/'+idEstudiante+'/'+idEstudiante+'/new'"
-                    class="add-product-button fuse-white mt-24 mt-md-0" *ngIf="rol!= 'ESTUDIANTE'">
-                <span>NUEVA CALIFICACIÓN</span>
+                    [routerLink]="'/apps/academico/graficas/'+idEstudiante+'/'+idEstudiante"
+                    class="add-product-button fuse-white mt-24 mt-md-0">
+                <span>VER GRÁFICOS</span>
             </button>
             <!-- / APP TITLE -->
 
@@ -65,40 +65,29 @@
 
                 <!-- Name Column -->
                 <ng-container matColumnDef="name">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Tipo</mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Detalle</mat-header-cell>
                     <mat-cell *matCellDef="let product">
-                        <p class="text-truncate">{{product.tipo}}</p>
+                        <p class="text-truncate">{{product.detalle}}</p>
                     </mat-cell>
                 </ng-container>
 
                 <!-- Category Column -->
                 <ng-container matColumnDef="category">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Detalle</mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Puntuación</mat-header-cell>
                     <mat-cell *matCellDef="let product">
                         <p class="category text-truncate">
-                            {{product.detalle}}
+                            {{product.puntaje}}
                         </p>
                     </mat-cell>
                 </ng-container>
 
-                <!-- Quantity Column -->
-                <ng-container matColumnDef="quantity">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Materia</mat-header-cell>
-                    <mat-cell *matCellDef="let product" fxHide fxShow.gt-sm>
-
-                        <span>
-                            {{product.materia}}
-                        </span>
-
-                    </mat-cell>
-                </ng-container>
 
                 <ng-container matColumnDef="fecha">
                     <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Nota</mat-header-cell>
                     <mat-cell *matCellDef="let product" fxHide fxShow.gt-sm>
 
                         <span>
-                            {{product.calificacion}}
+                            {{product.fecha_evaluacion}}
                         </span>
 
                     </mat-cell>

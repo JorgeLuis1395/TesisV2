@@ -1,0 +1,21 @@
+<div  style="width: 100%" fxFlexAlign="center center">
+    <h1 style="margin-left: 100px">Reporte Gráfico de Evolución Diagnóstico del Niño {{usuario}}</h1><br>
+
+    <div >
+        <highcharts-chart
+            [Highcharts]="highcharts"
+            [options]="chartOptions"
+            style="width: 100%; height: 50%; display: block;">
+        </highcharts-chart>
+
+
+
+        <highcharts-chart
+            [Highcharts]="highcharts1"
+            [options]="chartOptions1"
+            style="width: 100%; height: 50%; display: block;">
+        </highcharts-chart>
+    </div>
+
+</div>
+

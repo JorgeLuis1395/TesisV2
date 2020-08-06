@@ -1,57 +1,86 @@
+<div id="app-videos" class="page-layout simple" >
 
-<audio src="/assets/audios/selecciona1.mp3" autoplay ></audio>
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="jumbotron mt-3" align="center">
-        <h1>Da clic sobre la palabra correcta
-        </h1>
-      </div>
-    </div>
-    </div>
+    <!-- HEADER -->
+    <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="center center">
 
-<div *ngIf="estadoJuego2">
-  <div class="row">
-    <div class="col-sm-1"></div>
-    <div class="col-sm-10" align="center"><img src="{{ruta}}" height="380" width="570"></div>
-    <div class="col-sm-1"></div>
-  </div>
-
-  <br>
-  <div class="row">
-    <div class="col-sm-3"></div>
-    <div class="col-sm-9">
-      <div class="row">
-        <div class="col-sm-2" *ngFor="let palabra of arregloPalabraJuego2Aux; let ind = index">
-          <app-juego2
-            [nombre]="palabra"
-            [indice]="ind"
-            [palabraCorrecta]="palabraCorrecta">
-          </app-juego2>
+        <div class="hero-text">
+            <h1 [@animate]="{value:'*',params:{delay:'100ms', y:'25px'}}">
+                PRE DIAGNÓSTICO DE DISLEXIA</h1>
         </div>
-      </div>
+
     </div>
-  </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <div class="content p-24">
+
+        <div fxLayout="column" fxLayoutAlign="center">
+
+
+
+            <audio src="/assets/audios/selecciona1.mp3" autoplay></audio>
+            <div fxFlex="row">
+                <div fxFlex="column">
+                    <div class="jumbotron mt-3" align="center">
+                        <h1>Da clic sobre la palabra correcta
+                        </h1>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="estadoJuego2">
+                <div fxFlex="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-10" align="center"><img src="{{ruta}}" height="250" width="350"></div>
+                    <div class="col-sm-1"></div>
+                </div>
+
+                <br>
+                <div fxFlex="row">
+                    <div fxFlex="row">
+                        <div fxFlex="row">
+                            <div class="col-sm-2" *ngFor="let palabra of arregloPalabraJuego2Aux; let ind = index" style="margin-top: 40px">
+                                <app-juego2
+                                    [nombre]="palabra"
+                                    [indice]="ind"
+                                    [palabraCorrecta]="palabraCorrecta">
+                                </app-juego2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div fxFlex="row">
+                <div fxFlex="column" *ngIf="estadoFinalJuego">
+                    <div fxFlex="row">
+                        <h4>PUNTAJE OBTENIDO {{Puntaje}}/100 ¡FELICITACIONES!</h4>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <br><br>
+            <div fxFlex="row" >
+                <div fxFlex="column" fxFlexAlign="center center"></div>
+                <div fxFlex="row">
+                    <div class="col-sm-2">
+                        <button id="buttonFinish2" mat-button  style="background-color: #0a68d9; color: white"
+                                (click)="savePuntaje(); generarPdf()" > Finalizar
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+    <!-- / CONTENT -->
+
 </div>
 
-<div class="row">
-  <div class="col-sm-3"></div>
-  <div class="col-sm-6" *ngIf="estadoFinalJuego" style="background: #1bcc97">
-    <div class="row">
-      <h4>PUNTAJE OBTENIDO {{Puntaje}}/100 ¡FELICITACIONES!</h4>
-    </div>
-  </div>
-  <div class="col-sm-3"></div>
-</div>
 
-  <br><br>
-<div class="row">
-  <div class="col-sm-5"></div>
-  <div class="row">
-    <div class="col-sm-5"></div>
-    <div class="col-sm-2">
-      <button id="buttonFinish2" class="btn btn-primary" type="submit" style="display: none" (click)="savePuntaje(); generarPdf()"> Finalizar </button>
-    </div>
-  </div>
 
-  <div class="col-sm-5"></div>
-</div>

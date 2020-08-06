@@ -11,21 +11,22 @@ import {FuseUtils} from '@fuse/utils';
 import {EcommerceProductsService} from 'app/main/apps/e-commerce/lista_estudiantes/products.service';
 import {takeUntil} from 'rxjs/internal/operators';
 import {environment} from "../../../../../environments/environment";
-import {CalificacionesService} from "./calificaciones.service";
 import {ActivatedRoute} from "@angular/router";
 import {UsuarioService} from "../../../servicios/usuario.service";
+import {TestDiagnosticoService} from "./test-diagnostico.service";
 
 @Component({
-    selector: 'app-calificaciones',
-    templateUrl: './calificaciones.component.html',
+    selector: 'app-test-diagnostico',
+    templateUrl: './test-diagnostico.component.html',
+    styleUrls: ['./test-diagnostico.component.scss'],
     animations: fuseAnimations,
     encapsulation: ViewEncapsulation.None
 })
-export class CalificacionesComponent implements OnInit {
+export class TestDiagnosticoComponent implements OnInit {
 
     urlImagen = environment.url + '/public/users/';
     dataSource: FilesDataSource | null;
-    displayedColumns = ['id', 'name', 'category', 'quantity', 'fecha'];
+    displayedColumns = ['id', 'name', 'category', 'fecha'];
 
     @ViewChild(MatPaginator, {static: true})
     paginator: MatPaginator;
@@ -42,7 +43,7 @@ export class CalificacionesComponent implements OnInit {
     idEstudiante: any;
 
     constructor(
-        private _ecommerceProductsService: CalificacionesService,
+        private _ecommerceProductsService: TestDiagnosticoService,
         private route: ActivatedRoute,
         private listaEstudiantes: UsuarioService,
     ) {
@@ -53,7 +54,6 @@ export class CalificacionesComponent implements OnInit {
     // -----------------------------------------------------------------------------------------------------
     // @ Lifecycle hooks
     // -----------------------------------------------------------------------------------------------------
-    rol = localStorage.getItem('rol');
 
 
     /**
@@ -62,9 +62,8 @@ export class CalificacionesComponent implements OnInit {
     ngOnInit(): void {
         this.idEstudiante = this.route.snapshot.params.id
         this.consultarUsuario()
+        this.getPuntajeVariables()
         this.dataSource = new FilesDataSource(this._ecommerceProductsService, this.paginator, this.sort);
-
-        console.log(this.dataSource)
 
         fromEvent(this.filter.nativeElement, 'keyup')
             .pipe(
@@ -82,18 +81,35 @@ export class CalificacionesComponent implements OnInit {
     }
 
     consultarUsuario() {
-        if(localStorage.getItem('rol')==='ESTUDIANTE'){
-            this.listaEstudiantes.getEstudiante(localStorage.getItem('nick')).then(data => {
-                console.log(data)
-                this.usuario = data;
-            });
-        }else{
-            this.listaEstudiantes.getEstudianteId(this.route.snapshot.params.id).then(data => {
-                console.log(data)
-                this.usuario = data;
-            });
-        }
+        this.listaEstudiantes.getEstudianteId(this.route.snapshot.params.id).then(data => {
+            console.log(data)
+            this.usuario = data;
+            environment.nombreUsuario= this.usuario.nombre + ' '+ this.usuario.apellido
+            environment.fotoUsuario = environment.url+'/public/users/'+this.usuario.fotoUsuario
+        });
+    }
 
+    getPuntajeVariables(): void {
+        let auxPuntaje: any;
+        this.listaEstudiantes.getEstudianteId(this.route.snapshot.params.id).then(data => {
+            console.log(data)
+            this.usuario = data;
+            auxPuntaje = this.usuario.puntaje
+            console.log(auxPuntaje);
+            for (let i = 0; i < auxPuntaje.length; i++) {
+                console.log(auxPuntaje[i]);
+                if (auxPuntaje[i].detalle === 'Dislexia Fonológica') {
+                    console.log('ok')
+                    environment.dislexiaFonologica.push(parseInt(auxPuntaje[i].puntaje))
+                }
+                if (auxPuntaje[i].detalle === 'Dislexia Visual') {
+                    environment.dislexiaVisual.push(parseInt(auxPuntaje[i].puntaje))
+                }
+
+            }
+            console.log(environment.dislexiaVisual)
+
+        })
     }
 }
 
@@ -109,7 +125,7 @@ export class FilesDataSource extends DataSource<any> {
      * @param {MatSort} _matSort
      */
     constructor(
-        private _ecommerceProductsService: CalificacionesService,
+        private _ecommerceProductsService: TestDiagnosticoService,
         private _matPaginator: MatPaginator,
         private _matSort: MatSort
     ) {

@@ -9,6 +9,7 @@ import {FuseSidebarService} from '@fuse/components/sidebar/sidebar.service';
 
 import {navigation} from 'app/navigation/navigation';
 import {environment} from "../../../../environments/environment";
+import {FuseNavigationService} from "../../../../@fuse/components/navigation/navigation.service";
 
 @Component({
     selector: 'toolbar',
@@ -38,11 +39,13 @@ export class ToolbarComponent implements OnInit, OnDestroy {
      * @param {FuseConfigService} _fuseConfigService
      * @param {FuseSidebarService} _fuseSidebarService
      * @param {TranslateService} _translateService
+     * @param _fuseNavigationService
      */
     constructor(
         private _fuseConfigService: FuseConfigService,
         private _fuseSidebarService: FuseSidebarService,
         private _translateService: TranslateService,
+        private _fuseNavigationService: FuseNavigationService,
     ) {
         // Set the defaults
         this.userStatusOptions = [
@@ -157,5 +160,17 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
         // Use the selected language for translations
         this._translateService.use(lang.id);
+    }
+
+    logout() {
+        try {
+            localStorage.getItem('currentUser');
+            localStorage.removeItem('currentUser');
+            localStorage.clear();
+            this._fuseNavigationService.unregister('admin-nav');
+            window.location.replace('/#/pages/auth/login');
+        } catch (error) {
+            console.log(error);
+        }
     }
 }

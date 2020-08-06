@@ -51,11 +51,13 @@ export class DislexiaVisualComponent implements OnInit {
   }
 
   ngOnInit() {
+      document.getElementById('buttonFinish2').style.display = 'none';
     this.Juego2(0);
     this.estadoJuego2 = true;
     this.getEstudiante();
     this.getImage();
     this.getBase64ImageFromURL();
+
   }
 
   /*Metodos Juego 2*/
@@ -78,7 +80,9 @@ export class DislexiaVisualComponent implements OnInit {
   siguientePalabra() {
     this.contador++;
     if (this.contador < this.arregloPalabraJuego2.length) {
+
       this.Juego2(this.contador);
+        document.getElementById('buttonFinish2').style.display = 'none';
     } else {
       this.ruta = '/assets/imagenes/finalJuego1.jpg'
       document.getElementById('buttonFinish2').style.display = 'initial';

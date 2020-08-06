@@ -24,9 +24,11 @@ export class Juego2Component implements OnInit {
 
     var buttonSelect = document.getElementById('button'+this.indice);
 
+      console.log(buttonSelect.textContent.toString().trim() !== this.palabraCorrecta.toString(),buttonSelect.textContent.toString().trim() , this.palabraCorrecta)
+    if(buttonSelect.textContent.toString().trim() !== this.palabraCorrecta.toString().trim()){
 
-    if(buttonSelect.textContent != this.palabraCorrecta){
-      DislexiaVisualComponent.puntajeJuego2 = DislexiaVisualComponent.puntajeJuego2 - 5;
+        console.log(DislexiaVisualComponent.puntajeJuego2)
+      DislexiaVisualComponent.puntajeJuego2 = DislexiaVisualComponent.puntajeJuego2 - 16 ;
     }
 
     this.dislexiaComponente.siguientePalabra();

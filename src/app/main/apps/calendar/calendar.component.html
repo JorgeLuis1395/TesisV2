@@ -12,7 +12,7 @@
                         today
                     </mat-icon>
                     <span class="logo-text" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
-                        Calendar
+                        Agenda
                     </span>
                 </div>
 
@@ -31,15 +31,15 @@
                         <mat-icon>today</mat-icon>
                     </button>
 
-                    <button mat-icon-button (click)="view='day'" aria-label="Day" matTooltip="Day">
+                    <button mat-icon-button (click)="view='day'" aria-label="Dia" matTooltip="Day">
                         <mat-icon>view_day</mat-icon>
                     </button>
 
-                    <button mat-icon-button (click)="view='week'" aria-label="Week" matTooltip="Week">
+                    <button mat-icon-button (click)="view='week'" aria-label="Semana" matTooltip="Week">
                         <mat-icon>view_week</mat-icon>
                     </button>
 
-                    <button mat-icon-button (click)="view='month'" aria-label="Month" matTooltip="Month">
+                    <button mat-icon-button (click)="view='month'" aria-label="Mes" matTooltip="Month">
                         <mat-icon>view_module</mat-icon>
                     </button>
                 </div>
@@ -60,7 +60,7 @@
                 </button>
 
                 <div class="title">
-                    {{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}
+                    {{ viewDate | calendarDate:(view + 'ViewTitle'):'es' }}
                 </div>
 
                 <button mat-icon-button class="arrow"

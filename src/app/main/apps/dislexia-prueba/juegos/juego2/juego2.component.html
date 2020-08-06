@@ -1,5 +1,6 @@
 <div class="container">
-  <button class="btn btn-primary button" id="{{'button'+indice}}" type="submit" (click)="seleccionoButton()" style="width: 120px" >
-    <p style="margin-top: -5px; ">{{nombre}}</p>
+  <button mat-raised-button id="{{'button'+indice}}"  (click)="seleccionoButton()" style="width: 120px; background-color: #0a68d9; color: white" >
+    {{nombre}}
+      <br>
   </button>
 </div>

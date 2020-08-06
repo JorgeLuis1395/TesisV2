@@ -2272,7 +2272,7 @@
 
     // LOCALES
 
-    var defaultLocaleWeekdays = 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split('_');
+    var defaultLocaleWeekdays = 'Domingo_Lunes_Martes_Miercoles_Jueves_Viernes_Sábado'.split('_');
     function localeWeekdays (m) {
         return this._weekdays[m.day()];
     }

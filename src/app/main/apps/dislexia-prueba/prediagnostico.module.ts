@@ -22,8 +22,12 @@ import {CajaComponent} from "./juegos/caja/caja.component";
 import {DislexiaVisualComponent} from "./dislexia-visual/dislexia-visual.component";
 const routes: Routes = [
     {
-        path     : 'visual',
+        path     : 'fonologica',
         component: DislexiaTestComponent,
+    },
+    {
+        path     : 'visual',
+        component: DislexiaVisualComponent,
     },
     {
         path     : '**',

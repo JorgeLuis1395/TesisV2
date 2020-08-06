@@ -1,31 +1,27 @@
 import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {DataSource} from '@angular/cdk/collections';
-import {BehaviorSubject, fromEvent, merge, Observable, Subject} from 'rxjs';
-import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
-
-import {fuseAnimations} from '@fuse/animations';
-import {FuseUtils} from '@fuse/utils';
-
-import {EcommerceProductsService} from 'app/main/apps/e-commerce/lista_estudiantes/products.service';
-import {takeUntil} from 'rxjs/internal/operators';
 import {environment} from "../../../../../environments/environment";
-import {CalificacionesService} from "./calificaciones.service";
-import {ActivatedRoute} from "@angular/router";
-import {UsuarioService} from "../../../servicios/usuario.service";
+import {MatPaginator} from "@angular/material/paginator";
+import {MatSort} from "@angular/material/sort";
+import {BehaviorSubject, fromEvent, merge, Observable, Subject} from "rxjs";
+import {EcommerceOrdersService} from "../orders/orders.service";
+import {takeUntil} from "rxjs/internal/operators";
+import {debounceTime, distinctUntilChanged, map} from "rxjs/operators";
+import {DataSource} from "@angular/cdk/collections";
+import {FuseUtils} from "../../../../../@fuse/utils";
+import {fuseAnimations} from "../../../../../@fuse/animations";
+import {UsuarioPuntajeService} from "./usuario-puntaje.service";
 
 @Component({
-    selector: 'app-calificaciones',
-    templateUrl: './calificaciones.component.html',
+    selector: 'app-usuario-puntaje',
+    templateUrl: './usuario-puntaje.component.html',
+    styleUrls: ['./usuario-puntaje.component.scss'],
     animations: fuseAnimations,
     encapsulation: ViewEncapsulation.None
 })
-export class CalificacionesComponent implements OnInit {
-
+export class UsuarioPuntajeComponent implements OnInit {
     urlImagen = environment.url + '/public/users/';
     dataSource: FilesDataSource | null;
-    displayedColumns = ['id', 'name', 'category', 'quantity', 'fecha'];
+    displayedColumns = ['id', 'image', 'name', 'category', 'quantity', 'fecha'];
 
     @ViewChild(MatPaginator, {static: true})
     paginator: MatPaginator;
@@ -38,13 +34,9 @@ export class CalificacionesComponent implements OnInit {
 
     // Private
     private _unsubscribeAll: Subject<any>;
-    usuario: any;
-    idEstudiante: any;
 
     constructor(
-        private _ecommerceProductsService: CalificacionesService,
-        private route: ActivatedRoute,
-        private listaEstudiantes: UsuarioService,
+        private _ecommerceProductsService: UsuarioPuntajeService
     ) {
         // Set the private defaults
         this._unsubscribeAll = new Subject();
@@ -53,18 +45,12 @@ export class CalificacionesComponent implements OnInit {
     // -----------------------------------------------------------------------------------------------------
     // @ Lifecycle hooks
     // -----------------------------------------------------------------------------------------------------
-    rol = localStorage.getItem('rol');
-
 
     /**
      * On init
      */
     ngOnInit(): void {
-        this.idEstudiante = this.route.snapshot.params.id
-        this.consultarUsuario()
         this.dataSource = new FilesDataSource(this._ecommerceProductsService, this.paginator, this.sort);
-
-        console.log(this.dataSource)
 
         fromEvent(this.filter.nativeElement, 'keyup')
             .pipe(
@@ -81,19 +67,7 @@ export class CalificacionesComponent implements OnInit {
             });
     }
 
-    consultarUsuario() {
-        if(localStorage.getItem('rol')==='ESTUDIANTE'){
-            this.listaEstudiantes.getEstudiante(localStorage.getItem('nick')).then(data => {
-                console.log(data)
-                this.usuario = data;
-            });
-        }else{
-            this.listaEstudiantes.getEstudianteId(this.route.snapshot.params.id).then(data => {
-                console.log(data)
-                this.usuario = data;
-            });
-        }
-
+    ngOnDestroy(): void {
     }
 }
 
@@ -109,7 +83,7 @@ export class FilesDataSource extends DataSource<any> {
      * @param {MatSort} _matSort
      */
     constructor(
-        private _ecommerceProductsService: CalificacionesService,
+        private _ecommerceProductsService: UsuarioPuntajeService,
         private _matPaginator: MatPaginator,
         private _matSort: MatSort
     ) {

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {Product} from "../product/product.model";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {environment} from "../../../../../environments/environment";
@@ -13,11 +13,15 @@ import {ActivatedRoute} from "@angular/router";
 import {CalificacionesService} from "../calificaciones/calificaciones.service";
 import {CalificacionesnewService} from "./calificacionesnew.service";
 import {Calificacion} from "./calificacionesnew.model";
+import {fuseAnimations} from "../../../../../@fuse/animations";
 
 @Component({
     selector: 'app-calificacionesnew',
     templateUrl: './calificacionesnew.component.html',
-    styleUrls: ['./calificacionesnew.component.scss']
+    styleUrls: ['./calificacionesnew.component.scss'],
+
+    animations   : fuseAnimations,
+    encapsulation: ViewEncapsulation.None
 })
 export class CalificacionesnewComponent implements OnInit {
 

@@ -1,16 +1,14 @@
 import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
+import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {UsuarioService} from "../../../servicios/usuario.service";
-import {environment} from "../../../../../environments/environment";
 
 @Injectable()
-export class CalificacionesService implements Resolve<any> {
+export class UsuarioPuntajeService implements Resolve<any> {
     products = [];
     onProductsChanged: BehaviorSubject<any>;
     usuario: any;
-    routeParams: any;
 
     /**
      * Constructor
@@ -33,7 +31,6 @@ export class CalificacionesService implements Resolve<any> {
      * @returns {Observable<any> | Promise<any> | any}
      */
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
-        this.routeParams = route.params;
         return new Promise((resolve, reject) => {
 
             Promise.all([
@@ -55,45 +52,25 @@ export class CalificacionesService implements Resolve<any> {
     getProducts(): Promise<any> {
         this.products = [];
         return new Promise((resolve, reject) => {
-            if(localStorage.getItem('rol') === 'ESTUDIANTE'){
-                this.listaEstudiantes.getEstudiante(localStorage.getItem('nick')).then(data => {
+            if (localStorage.getItem('rol' )=== 'PROFESOR'){
+                this.listaEstudiantes.getUsuario(localStorage.getItem('nick')).then(data => {
+                    console.log(data)
                     this.usuario = data;
+                    this.products = (this.usuario.estudiante)
                     console.log(this.products)
-                    if(this.usuario.calificacion){
-                        this.products= (this.usuario.calificacion)
-                        console.log(this.products)
-                        this.onProductsChanged.next(this.products);
-                        resolve(this.usuario.calificacion);
-                    }
-                    else{
-                        this.products= []
-                        console.log(this.products)
-                        this.onProductsChanged.next(this.products);
-                    }
                     this.onProductsChanged.next(this.products);
                     resolve(this.usuario.estudiante);
                 }, reject);
-
             }
-            else{
-                this.listaEstudiantes.getEstudianteId(this.routeParams.id).then(data => {
+            if (localStorage.getItem('rol' )=== 'ESTUDIANTE'){
+                this.listaEstudiantes.getEstudiante(localStorage.getItem('nick')).then(data => {
+                    console.log(data)
                     this.usuario = data;
+                    this.products = (this.usuario.estudiante)
                     console.log(this.products)
-                    if(this.usuario.calificacion){
-                        this.products= (this.usuario.calificacion)
-                        console.log(this.products)
-                        this.onProductsChanged.next(this.products);
-                        resolve(this.usuario.calificacion);
-                    }
-                    else{
-                        this.products= []
-                        console.log(this.products)
-                        this.onProductsChanged.next(this.products);
-                    }
                     this.onProductsChanged.next(this.products);
                     resolve(this.usuario.estudiante);
                 }, reject);
-
             }
 
 

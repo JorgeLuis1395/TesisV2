@@ -1,21 +1,23 @@
-import { Component, Inject, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { CalendarEvent } from 'angular-calendar';
+import {Component, Inject, ViewEncapsulation} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {CalendarEvent} from 'angular-calendar';
 
-import { MatColors } from '@fuse/mat-colors';
+import {MatColors} from '@fuse/mat-colors';
 
-import { CalendarEventModel } from 'app/main/apps/calendar/event.model';
+import {CalendarEventModel} from 'app/main/apps/calendar/event.model';
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {environment} from "../../../../../environments/environment";
+import {subDays} from "date-fns";
 
 @Component({
-    selector     : 'calendar-event-form-dialog',
-    templateUrl  : './event-form.component.html',
-    styleUrls    : ['./event-form.component.scss'],
+    selector: 'calendar-event-form-dialog',
+    templateUrl: './event-form.component.html',
+    styleUrls: ['./event-form.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
 
-export class CalendarEventFormDialogComponent
-{
+export class CalendarEventFormDialogComponent {
     action: string;
     event: CalendarEvent;
     eventForm: FormGroup;
@@ -30,28 +32,28 @@ export class CalendarEventFormDialogComponent
      * @param {FormBuilder} _formBuilder
      */
     constructor(
-        public matDialogRef: MatDialogRef<CalendarEventFormDialogComponent>,
+        public matDialogRef: MatDialogRef<CalendarEventFormDialogComponent>, private httpClient: HttpClient,
         @Inject(MAT_DIALOG_DATA) private _data: any,
-        private _formBuilder: FormBuilder
-    )
-    {
+        private _formBuilder: FormBuilder,
+    ) {
+        console.log(this.event)
         this.event = _data.event;
         this.action = _data.action;
 
-        if ( this.action === 'edit' )
-        {
+        if (this.action === 'edit') {
             this.dialogTitle = this.event.title;
-        }
-        else
-        {
+        } else {
             this.dialogTitle = 'New Event';
+
+            //this.ingresarFeriado(this.eventForm.value)
             this.event = new CalendarEventModel({
                 start: _data.date,
-                end  : _data.date
+                end: _data.date
             });
         }
 
         this.eventForm = this.createEventForm();
+
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -63,22 +65,29 @@ export class CalendarEventFormDialogComponent
      *
      * @returns {FormGroup}
      */
-    createEventForm(): FormGroup
-    {
+    createEventForm(): FormGroup {
         return new FormGroup({
-            title : new FormControl(this.event.title),
-            start : new FormControl(this.event.start),
-            end   : new FormControl(this.event.end),
+            title: new FormControl(this.event.title),
+            start: new FormControl(this.event.start),
+            end: new FormControl(this.event.end),
             allDay: new FormControl(this.event.allDay),
-            color : this._formBuilder.group({
-                primary  : new FormControl(this.event.color.primary),
+            color: this._formBuilder.group({
+                primary: new FormControl(this.event.color.primary),
                 secondary: new FormControl(this.event.color.secondary)
             }),
-            meta  :
+            meta:
                 this._formBuilder.group({
                     location: new FormControl(this.event.meta.location),
-                    notes   : new FormControl(this.event.meta.notes)
+                    notes: new FormControl(this.event.meta.notes),
+                    estudiante: new FormControl(this.event.meta.estudiante),
+                    horaInicio: new FormControl(this.event.meta.horaInicio),
+                    horaFin: new FormControl(this.event.meta.horaFin),
                 })
         });
     }
+
+
+
+
+
 }

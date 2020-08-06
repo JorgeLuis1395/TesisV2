@@ -6,11 +6,13 @@ import {UsuarioService} from "../../../servicios/usuario.service";
 import {environment} from "../../../../../environments/environment";
 
 @Injectable()
-export class CalificacionesService implements Resolve<any> {
+export class TestDiagnosticoService implements Resolve<any> {
     products = [];
     onProductsChanged: BehaviorSubject<any>;
     usuario: any;
     routeParams: any;
+    dislexiaFonologica: [];
+    dislexiaVisual: [];
 
     /**
      * Constructor
@@ -55,48 +57,26 @@ export class CalificacionesService implements Resolve<any> {
     getProducts(): Promise<any> {
         this.products = [];
         return new Promise((resolve, reject) => {
-            if(localStorage.getItem('rol') === 'ESTUDIANTE'){
-                this.listaEstudiantes.getEstudiante(localStorage.getItem('nick')).then(data => {
-                    this.usuario = data;
+            this.listaEstudiantes.getEstudianteId(this.routeParams.id).then(data => {
+                this.usuario = data;
+                console.log(this.products)
+                if (this.usuario.puntaje) {
+                    this.products = (this.usuario.puntaje)
                     console.log(this.products)
-                    if(this.usuario.calificacion){
-                        this.products= (this.usuario.calificacion)
-                        console.log(this.products)
-                        this.onProductsChanged.next(this.products);
-                        resolve(this.usuario.calificacion);
-                    }
-                    else{
-                        this.products= []
-                        console.log(this.products)
-                        this.onProductsChanged.next(this.products);
-                    }
                     this.onProductsChanged.next(this.products);
-                    resolve(this.usuario.estudiante);
-                }, reject);
-
-            }
-            else{
-                this.listaEstudiantes.getEstudianteId(this.routeParams.id).then(data => {
-                    this.usuario = data;
+                    resolve(this.usuario.calificacion);
+                } else {
+                    this.products = []
                     console.log(this.products)
-                    if(this.usuario.calificacion){
-                        this.products= (this.usuario.calificacion)
-                        console.log(this.products)
-                        this.onProductsChanged.next(this.products);
-                        resolve(this.usuario.calificacion);
-                    }
-                    else{
-                        this.products= []
-                        console.log(this.products)
-                        this.onProductsChanged.next(this.products);
-                    }
                     this.onProductsChanged.next(this.products);
-                    resolve(this.usuario.estudiante);
-                }, reject);
-
-            }
+                }
+                this.onProductsChanged.next(this.products);
+                resolve(this.usuario.estudiante);
+            }, reject);
 
 
         });
     }
+
+
 }

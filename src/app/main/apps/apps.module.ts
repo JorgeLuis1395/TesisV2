@@ -5,6 +5,10 @@ import { FuseSharedModule } from '@fuse/shared.module';
 import {MatIconModule} from "@angular/material/icon";
 import {MatCardModule} from "@angular/material/card";
 import { DislexiaTestComponent } from './dislexia-prueba/dislexia-test/dislexia-test.component';
+import { PerfilComponent } from './perfil/perfil.component';
+import {MatStepperModule} from "@angular/material/stepper";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatSelectModule} from "@angular/material/select";
 
 const routes = [
     {
@@ -44,6 +48,10 @@ const routes = [
         loadChildren: () => import('./ahorcado/contacts.module').then(m => m.ContactsModule)
     },
     {
+        path        : 'perfil',
+        loadChildren: () => import('./perfil/perfil.module').then(m => m.PerfilModule)
+    },
+    {
         path        : 'memoria',
         loadChildren: () => import('./memoria/memoria.module').then(m => m.MemoriaModule)
     },
@@ -78,7 +86,7 @@ const routes = [
         RouterModule.forChild(routes),
         FuseSharedModule,
         MatIconModule,
-        MatCardModule
+        MatCardModule,
     ],
     declarations: []
 })

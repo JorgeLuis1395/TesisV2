@@ -105,13 +105,15 @@ export class DislexiaTestComponent implements OnInit {
     nextWord() {
 
         if (this.contador === this.palabras.length - 1) {
-            this.arregloPalabra = [];
-            this.contador = 0;
-            this.ruta = '/assets/imagenes/pikachu.gif'
+            this.estadoFinalJuego = true;
             this.estado = false;
+            this.ruta = '/assets/imagenes/pikachu.gif'
             document.getElementById('buttonNext').style.display = 'none';
             document.getElementById('buttonFinish').style.display = 'initial';
-            this.estadoFinalJuego = true;
+            this.arregloPalabra = [];
+            this.contador = 0;
+
+
         } else {
             this.calcularPuntaje();
             this.contador++;

@@ -32,6 +32,13 @@ import { CalificacionesComponent } from './calificaciones/calificaciones.compone
 import {CalificacionesService} from "./calificaciones/calificaciones.service";
 import { CalificacionesnewComponent } from './calificacionesnew/calificacionesnew.component';
 import {CalificacionesnewService} from "./calificacionesnew/calificacionesnew.service";
+import { UsuarioPuntajeComponent } from './usuario-puntaje/usuario-puntaje.component';
+import { TestDiagnosticoComponent } from './test-diagnostico/test-diagnostico.component';
+import { GraficasComponent } from './graficas/graficas.component';
+import {UsuarioPuntajeService} from "./usuario-puntaje/usuario-puntaje.service";
+import {TestDiagnosticoService} from "./test-diagnostico/test-diagnostico.service";
+
+import {HighchartsChartModule} from "highcharts-angular";
 
 const routes: Routes = [
     {
@@ -62,6 +69,14 @@ const routes: Routes = [
             data: CalificacionesService
         }
     },
+
+    {
+        path     : 'calificacion',
+        component: CalificacionesComponent,
+        resolve  : {
+            data: CalificacionesService
+        }
+    },
     {
         path     : 'estudiante/calificaciones/:id/:handle/new',
         component: CalificacionesnewComponent,
@@ -74,6 +89,27 @@ const routes: Routes = [
         component: EcommerceOrdersComponent,
         resolve  : {
             data: EcommerceOrdersService
+        }
+    },
+    {
+        path     : 'graficas/:id/:handle',
+        component: GraficasComponent,
+        resolve  : {
+            data: EcommerceOrdersService
+        }
+    },
+    {
+        path     : 'puntaje',
+        component: UsuarioPuntajeComponent,
+        resolve  : {
+            data: UsuarioPuntajeService,
+        }
+    },
+    {
+        path     : 'puntaje/:id/:handle',
+        component: TestDiagnosticoComponent,
+        resolve  : {
+            data: TestDiagnosticoService
         }
     },
     {
@@ -93,10 +129,13 @@ const routes: Routes = [
         EcommerceOrderComponent,
         CalificacionesComponent,
         CalificacionesnewComponent,
+        UsuarioPuntajeComponent,
+        TestDiagnosticoComponent,
+        GraficasComponent,
     ],
     imports     : [
         RouterModule.forChild(routes),
-
+        HighchartsChartModule,
         MatButtonModule,
         MatChipsModule,
         MatExpansionModule,
@@ -127,6 +166,8 @@ const routes: Routes = [
         InformacionEstudianteService,
         CalificacionesService,
         CalificacionesnewService,
+        UsuarioPuntajeService,
+        TestDiagnosticoService
     ]
 })
 export class EcommerceModule
