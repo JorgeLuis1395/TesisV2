@@ -5,6 +5,10 @@ import {takeUntil} from 'rxjs/operators';
 
 import {FuseConfigService} from '@fuse/services/config.service';
 import {fuseAnimations} from '@fuse/animations';
+import Swal from "sweetalert2";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {environment} from "../../../../../environments/environment";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'register-2',
@@ -21,7 +25,9 @@ export class Register2Component implements OnInit, OnDestroy {
 
     constructor(
         private _fuseConfigService: FuseConfigService,
-        private _formBuilder: FormBuilder
+        private _formBuilder: FormBuilder,
+        private http: HttpClient,
+        public router: Router
     ) {
         // Configure the layout
         this._fuseConfigService.config = {
@@ -87,7 +93,52 @@ export class Register2Component implements OnInit, OnDestroy {
         this._unsubscribeAll.complete();
     }
 
-    
+    ingresarUsuario() {
+        this.http.post(environment.url + '/usuario',
+            {
+                nombre: this.registerForm.value.nombre,
+                apellido: this.registerForm.value.apellido,
+                email: this.registerForm.value.correo,
+                nick: this.registerForm.value.nick,
+                password: this.registerForm.value.password,
+                cedula: this.registerForm.value.cedula,
+                fecha_nacimiento: this.registerForm.value.fecha_nacimiento,
+                grado: this.registerForm.value.grado.toString(),
+                telefono: this.registerForm.value.telefono,
+                unidad_educativa: this.registerForm.value.unidad_educativa,
+                //nombreFoto: this.path,
+                amie: this.registerForm.value.amie,
+                rol: 'Prof',
+            }).subscribe(data => {
+            this.registrocorrecto()
+            const rutaHomeUsuario = [
+                '/*',
+            ];
+            this.router.navigate(rutaHomeUsuario);
+            this.ngOnInit();
+        })
+
+    }
+
+    registrocorrecto() {
+        Swal.fire({
+            title: 'Correcto!',
+            text: 'Se ingresó de manera correcta el usuario',
+            icon: 'success',
+            confirmButtonText: 'Aceptar'
+        })
+    }
+
+    registroIncorrecto() {
+        Swal.fire({
+            title: 'Error!',
+            text: 'No se ingresó el usuario',
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+        })
+    }
+
+
 }
 
 /**
