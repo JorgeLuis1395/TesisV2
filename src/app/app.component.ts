@@ -335,26 +335,47 @@ export class AppComponent implements OnInit, OnDestroy {
                 ]
             },
             {
-                id: 'control-panel',
-                title: 'ESTUDIANTES',
+                id: 'cron-jobs',
+                title: 'Cuentos',
+                type: 'item',
+                icon: 'spellcheck',
+                url: '/apps/academy'
+            },
+            {
+                id: 'juegos',
+                title: 'Juegos',
                 type: 'group',
-                icon: 'supervised_user_circle',
+                icon: 'apps',
                 children: [
                     {
                         id: 'cron-jobs',
-                        title: 'Calificaciones',
+                        title: 'Ahorcado',
                         type: 'item',
-                        icon: 'spellcheck',
-                        url: '/apps/file-manager'
+                        icon: 'settings',
+                        url: '/apps/ahorcado'
                     },
                     {
                         id: 'maintenance-mode',
-                        title: 'Lista',
+                        title: 'Memoria',
                         type: 'item',
-                        icon: 'format_list_numbered',
-                        url: '/apps/e-commerce/products'
+                        icon: 'build',
+                        url: '/apps/memoria'
                     }
                 ]
+            },
+            {
+                id: 'maintenance-mode',
+                title: 'Videos',
+                type: 'item',
+                icon: 'format_list_numbered',
+                url: '/apps/videos/videos'
+            },
+            {
+                id: 'maintenance-mode',
+                title: 'Imagenes',
+                type: 'item',
+                icon: 'format_list_numbered',
+                url: '/apps/cuentos'
             },
             {
                 id: 'agenda',
@@ -364,28 +385,6 @@ export class AppComponent implements OnInit, OnDestroy {
                 url: '/apps/todo'
             },
 
-            {
-                id: 'perfil',
-                title: 'PERFIL',
-                type: 'group',
-                icon: 'apps',
-                children: [
-                    {
-                        id: 'cron-jobs',
-                        title: 'Cron Jobs',
-                        type: 'item',
-                        icon: 'settings',
-                        url: '/apps/file-manager'
-                    },
-                    {
-                        id: 'maintenance-mode',
-                        title: 'Maintenance Mode',
-                        type: 'item',
-                        icon: 'build',
-                        url: '/apps/todo'
-                    }
-                ]
-            }
         ];
 
         // Register the new navigation
