@@ -7,6 +7,7 @@ import { FuseConfigService } from '@fuse/services/config.service';
 import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
 import { FusePerfectScrollbarDirective } from '@fuse/directives/fuse-perfect-scrollbar/fuse-perfect-scrollbar.directive';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
+import {environment} from "../../../../../../environments/environment";
 
 @Component({
     selector     : 'navbar-vertical-style-1',
@@ -18,7 +19,9 @@ export class NavbarVerticalStyle1Component implements OnInit, OnDestroy
 {
     fuseConfig: any;
     navigation: any;
-
+    nombresUsuario = localStorage.getItem('nombreUsuario');
+    apellidosUsuario = localStorage.getItem('apellidoUsuario');
+    fotoUsuario = environment.url + '/public/users' + localStorage.getItem('imagenUsuario')
     // Private
     private _fusePerfectScrollbar: FusePerfectScrollbarDirective;
     private _unsubscribeAll: Subject<any>;

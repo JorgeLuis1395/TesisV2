@@ -121,6 +121,7 @@ export class AppComponent implements OnInit, OnDestroy {
      * On init
      */
     ngOnInit(): void {
+        this._fuseNavigationService.unregister('admin-nav');
         // Subscribe to config changes
         this._fuseConfigService.config
             .pipe(takeUntil(this._unsubscribeAll))
@@ -142,7 +143,7 @@ export class AppComponent implements OnInit, OnDestroy {
                     this.fuseConfig.colorTheme = 'theme-blue-gray-dark';
                     this.fuseConfig.layout.style = 'horizontal-layout-1';
                     this.fuseConfig.layout.navbar.primaryBackground = 'fuse-navy-50';
-                    this.fuseConfig.layout.toolbar.position = 'above';
+                    this.fuseConfig.layout.toolbar.position = 'below';
                     this.fuseConfig.layout.toolbar.hidden = false;
                     this.fuseConfig.layout.footer.hidden = true;
                 }

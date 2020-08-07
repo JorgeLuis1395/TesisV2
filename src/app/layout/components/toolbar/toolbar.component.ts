@@ -129,6 +129,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     // -----------------------------------------------------------------------------------------------------
     // @ Public methods
     // -----------------------------------------------------------------------------------------------------
+    rol= localStorage.getItem('rol');
 
     /**
      * Toggle sidebar open
@@ -165,10 +166,13 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     logout() {
         try {
             localStorage.getItem('currentUser');
-            localStorage.removeItem('currentUser');
+            localStorage.removeItem('rol');
+            localStorage.removeItem('idProfesorRegistrado');
+            localStorage.removeItem('idEstudianteRegistrado');
+            localStorage.removeItem('nick');
             localStorage.clear();
             this._fuseNavigationService.unregister('admin-nav');
-            window.location.replace('/#/pages/auth/login');
+            window.location.replace('/#/pages/auth/login-2');
         } catch (error) {
             console.log(error);
         }
