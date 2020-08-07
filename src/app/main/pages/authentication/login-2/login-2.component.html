@@ -50,11 +50,8 @@
 
                 <div class="remember-forgot-password" fxLayout="row" fxLayout.xs="column"
                      fxLayoutAlign="space-between center">
-                    <mat-checkbox class="remember-me" aria-label="Remember Me">
-                        Remember Me
-                    </mat-checkbox>
 
-                    <a class="forgot-password" [routerLink]="'/pages/auth/forgot-password-2'">
+                    <a class="forgot-password" style="margin-left: 20%" [routerLink]="'/pages/auth/forgot-password-2'">
                         Recordar Contraseña
                     </a>
                 </div>
@@ -69,9 +66,9 @@
             <div class="separator">
                 <span class="text">o</span>
             </div>
-            <button mat-raised-button color="accent" fxLayout="column" fxLayoutAlign="center center"
-                     (click)="getSinRegistro()">
-                Sin Registro
+            <button mat-button style="color: white; background-color: blue; margin-left: 20%"
+                    (click)="getSinRegistro()" >
+               Ingreso Sin Registro
             </button>
             <div class="register" fxLayout="column" fxLayoutAlign="center center">
                 <span class="text">No tienes una cuenta?</span>
