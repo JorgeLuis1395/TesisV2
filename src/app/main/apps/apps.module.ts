@@ -4,12 +4,6 @@ import { RouterModule } from '@angular/router';
 import { FuseSharedModule } from '@fuse/shared.module';
 import {MatIconModule} from "@angular/material/icon";
 import {MatCardModule} from "@angular/material/card";
-import { DislexiaTestComponent } from './dislexia-prueba/dislexia-test/dislexia-test.component';
-import { PerfilComponent } from './perfil/perfil.component';
-import {MatStepperModule} from "@angular/material/stepper";
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatSelectModule} from "@angular/material/select";
-
 const routes = [
     {
         path        : 'mail',

@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Subject} from "rxjs";
 import {UsuarioService} from "../../servicios/usuario.service";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../../../environments/environment";
 import {fuseAnimations} from "../../../../@fuse/animations";
 
@@ -68,7 +68,7 @@ export class PerfilComponent implements OnInit {
     // -----------------------------------------------------------------------------------------------------
     // @ Lifecycle hooks
     // -----------------------------------------------------------------------------------------------------
-    rutaImagen = environment.url + '/public/usuario/';
+    rutaImagen = environment.url + '/public/users';
 
     /**
      * On init
@@ -100,6 +100,7 @@ export class PerfilComponent implements OnInit {
         this.horizontalStepperStep6 = this._formBuilder.group({
             nick: [''],
             password: [''],
+            unidad_educativa :[''],
         });
     }
 
@@ -111,11 +112,11 @@ export class PerfilComponent implements OnInit {
     usuarioFuncion(): void {
         let aux: any;
         if (localStorage.getItem('rol') === 'PROFESOR') {
-            this._httpClient.get(environment.url + '/usuario/' + localStorage.getItem('nick')).subscribe(res => {
+            this._httpClient.get(environment.url + '/usuario/' + localStorage.getItem('nick'), {headers: new HttpHeaders({'Authorization': 'Bearer ' + localStorage.getItem('tokenUsuario')})}).subscribe(res => {
                 console.log(res);
                 aux = res;
-                this.imgURL = this.rutaImagen + aux.foto_usuario;
-                this.identificacion_usuario = aux.identificacion_usuario;
+                this.imgURL = this.rutaImagen + aux.nombreFoto;
+                this.identificacion_usuario = aux.cedula;
                 this.horizontalStepperStep0 = this._formBuilder.group({
                     imagenUsuario: [aux.nombreFoto],
                 });
@@ -133,28 +134,24 @@ export class PerfilComponent implements OnInit {
                     telefono: [aux.telefono],
                     email: [aux.email],
                 });
-                this.horizontalStepperStep4 = this._formBuilder.group({
+                this.horizontalStepperStep6 = this._formBuilder.group({
                     nick: [aux.nick],
                     password: [aux.password],
+                    unidad_educativa:[aux.unidad_educativa],
+
                 });
 
-                this.horizontalStepperStep6 = this._formBuilder.group({
-                    facebook: [aux.facebook],
-                    youtube: [aux.youtube],
-                    instagram: [aux.instagram],
-                    linkedlink: [aux.linkedlink],
-                });
 
             });
         }
 
 
         if (localStorage.getItem('rol') === 'ESTUDIANTE') {
-            this._httpClient.get(environment.url + '/estudiante/' + localStorage.getItem('nick')).subscribe(res => {
+            this._httpClient.get(environment.url + '/estudiante/' + localStorage.getItem('nick'), {headers: new HttpHeaders({'Authorization': 'Bearer ' + localStorage.getItem('tokenUsuario')})}).subscribe(res => {
                 console.log(res);
                 aux = res;
-                this.imgURL = this.rutaImagen + aux.foto_usuario;
-                this.identificacion_usuario = aux.identificacion_usuario;
+                this.imgURL = this.rutaImagen + aux.nombreFoto;
+                this.identificacion_usuario = aux.cedula;
                 this.horizontalStepperStep0 = this._formBuilder.group({
                     imagenUsuario: [aux.nombreFoto],
                 });
@@ -163,20 +160,22 @@ export class PerfilComponent implements OnInit {
                     apellidos: [aux.apellido],
                     identificacion: [aux.cedula],
                     fecha_nacimiento: [aux.fecha_nacimiento],
+                    direccion: [aux.direccion],
                 });
 
                 this.horizontalStepperStep2 = this._formBuilder.group({});
 
                 this.horizontalStepperStep3 = this._formBuilder.group({
-                    telefono: [aux.telefono_usuario],
-                    email: [aux.correo_usuario],
+                    telefono: [aux.telefono],
+                    email: [aux.email],
                 });
-
-
                 this.horizontalStepperStep6 = this._formBuilder.group({
-                    nick: [aux.facebook],
-                    password: [aux.youtube],
+                    nick: [aux.nick],
+                    password: [aux.password],
+                    unidad_educativa:[aux.unidad_educativa],
+
                 });
+
 
             });
         }
@@ -186,31 +185,53 @@ export class PerfilComponent implements OnInit {
 
 
     async updateUserData() {
+        if (localStorage.getItem('rol') === 'PROFESOR') {
+            const res = await this._httpClient.put(environment.url + '/usuario/' + localStorage.getItem('idProfesorRegistrado'), {
+                nombre: this.horizontalStepperStep1.value.nombres,
+                apellido: this.horizontalStepperStep1.value.apellidos,
+                cedula: this.horizontalStepperStep1.value.identificacion,
+                fecha_nacimiento: new Date(this.horizontalStepperStep1.value.fecha_nacimiento),
+                //direccion: this.horizontalStepperStep1.value.direccion,
+                unidad_educativa: this.horizontalStepperStep6.value.unidad_educativa,
+                email: this.horizontalStepperStep3.value.email,
+                // telefono: this.horizontalStepperStep3.value.telefono,
+                //nivel_estu_usuario: this.horizontalStepperStep4.value.formacion,
+                nombreFoto: this.imagenSelecionada,
+                nick: this.horizontalStepperStep6.value.nick,
+                password: this.horizontalStepperStep6.value.password,
+                //sexo_usuario: userUpdate.sex,
+                telefono: this.horizontalStepperStep3.value.telefono.toString()
+            }, {}).subscribe(res => {
+                Swal.fire({
+                    icon: 'success',
+                    text: 'Los datos fueron modificados con éxito',
+                });
+            });
+        }
 
-         const res = await this._httpClient.put(environment.url+'/usuario/' + localStorage.getItem('idProfesorRegistrado'),{
-              nombre: this.horizontalStepperStep1.value.nombres,
-              apellido: this.horizontalStepperStep1.value.apellidos,
-              cedula: this.horizontalStepperStep1.value.identificacion,
-              fecha_nacimiento: new Date(this.horizontalStepperStep1.value.fecha_nacimiento),
-              //direccion: this.horizontalStepperStep1.value.direccion,
-              institucion_usuario: this.horizontalStepperStep4.value.institucion,
-              email: this.horizontalStepperStep3.value.email,
-             // telefono: this.horizontalStepperStep3.value.telefono,
-              //nivel_estu_usuario: this.horizontalStepperStep4.value.formacion,
-              foto_usuario: this.imagenSelecionada,
-              nick: this.horizontalStepperStep6.value.nick,
-              password: this.horizontalStepperStep6.value.password,
-
-
-              //sexo_usuario: userUpdate.sex,
-              telefono_usuario: this.horizontalStepperStep3.value.telefono.toString()
-          }, {}).subscribe(res=>{
-             Swal.fire({
-                 icon: 'success',
-                 text: 'Los datos fueron modificados con éxito',
-             });
-         });
-
+        if (localStorage.getItem('rol') === 'ESTUDIANTE') {
+            const res = await this._httpClient.put(environment.url + '/estudiante/' + localStorage.getItem('idEstudianteRegistrado'), {
+                nombre: this.horizontalStepperStep1.value.nombres,
+                apellido: this.horizontalStepperStep1.value.apellidos,
+                cedula: this.horizontalStepperStep1.value.identificacion,
+                fecha_nacimiento: new Date(this.horizontalStepperStep1.value.fecha_nacimiento),
+                //direccion: this.horizontalStepperStep1.value.direccion,
+                unidad_educativa: this.horizontalStepperStep6.value.unidad_educativa,
+                email: this.horizontalStepperStep3.value.email,
+                // telefono: this.horizontalStepperStep3.value.telefono,
+                //nivel_estu_usuario: this.horizontalStepperStep4.value.formacion,
+                nombreFoto: this.imagenSelecionada,
+                nick: this.horizontalStepperStep6.value.nick,
+                password: this.horizontalStepperStep6.value.password,
+                //sexo_usuario: userUpdate.sex,
+                telefono: this.horizontalStepperStep3.value.telefono.toString()
+            }, {}).subscribe(res => {
+                Swal.fire({
+                    icon: 'success',
+                    text: 'Los datos fueron modificados con éxito',
+                });
+            });
+        }
     }
 
 

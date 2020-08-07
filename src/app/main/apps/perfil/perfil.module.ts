@@ -10,11 +10,16 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { FuseSharedModule } from '@fuse/shared.module';
 
 import {PerfilComponent} from './perfil.component';
+import { CambiarContrasenaComponent } from './cambiar-contrasena/cambiar-contrasena.component';
 
 const routes: Routes = [
     {
         path     : '',
         component: PerfilComponent
+    },
+    {
+        path     : 'change-password',
+        component: CambiarContrasenaComponent
     },
 
 ];
@@ -22,6 +27,7 @@ const routes: Routes = [
 @NgModule({
     declarations: [
         PerfilComponent,
+        CambiarContrasenaComponent,
     ],
     imports     : [
         RouterModule.forChild(routes),
