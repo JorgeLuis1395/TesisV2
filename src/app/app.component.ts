@@ -144,6 +144,7 @@ export class AppComponent implements OnInit, OnDestroy {
                     this.fuseConfig.layout.navbar.primaryBackground = 'fuse-navy-50';
                     this.fuseConfig.layout.toolbar.position = 'above';
                     this.fuseConfig.layout.toolbar.hidden = false;
+                    this.fuseConfig.layout.footer.hidden = true;
                 }
 
                 if (localStorage.getItem('rol') === 'ESTUDIANTE') {
