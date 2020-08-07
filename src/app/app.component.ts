@@ -378,13 +378,6 @@ export class AppComponent implements OnInit, OnDestroy {
                 icon: 'format_list_numbered',
                 url: '/apps/cuentos'
             },
-            {
-                id: 'agenda',
-                title: 'AGENDA',
-                type: 'group',
-                icon: 'calendar_today',
-                url: '/apps/todo'
-            },
 
         ];
 

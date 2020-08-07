@@ -5,8 +5,8 @@
     .header {
         position: relative;
         flex: 1 0 auto;
-        height: 280px;
-        max-height: 280px;
+        height: 100px;
+        max-height: 150px;
         text-align: center;
         overflow: hidden;
 
@@ -174,4 +174,7 @@
             }
         }
     }
+}
+p{
+    color: white;
 }

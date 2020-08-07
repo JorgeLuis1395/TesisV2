@@ -60,6 +60,23 @@ export class Register2Component implements OnInit, OnDestroy {
      * On init
      */
     ngOnInit(): void {
+        this._fuseConfigService.config = {
+            colorTheme: 'theme-default',
+            layout: {
+                navbar: {
+                    hidden: true
+                },
+                toolbar: {
+                    hidden: true
+                },
+                footer: {
+                    hidden: true
+                },
+                sidepanel: {
+                    hidden: true
+                }
+            }
+        };
         this.registerForm = this._formBuilder.group({
             nombre: ['', Validators.required],
             apellido: ['', Validators.required],

@@ -5,7 +5,8 @@
 export const environment = {
     production: false,
     hmr: false,
-    url: 'http://localhost:3000',
+   // url: 'http://localhost:3000',
+    url: 'http://20.51.234.239:3000',
     id_usuario: 0,
     nombre_login: '',
     estado_usuario: false,
